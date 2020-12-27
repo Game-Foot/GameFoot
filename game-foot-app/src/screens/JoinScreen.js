@@ -6,7 +6,7 @@ function JoinScreen () {
 
   return (
       <div>
-          Join Screen
+          Join Screen!
       </div>
   );
 }
