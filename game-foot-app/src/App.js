@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+// Top-level application screen.
+
 import './styles/App.css';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import JoinScreen from "./screens/JoinScreen.js";
+import LobbyScreen from "./screens/LobbyScreen.js";
+import VoteScreen from "./screens/VoteScreen.js";
+import ResultsScreen from "./screens/ResultsScreen.js";
 
 function App() {
+
+  const helperFunction = () => {
+    console.log("e");
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={JoinScreen} />
+        <Route path="/lobby" component={LobbyScreen} />
+        <Route path="/vote" component={VoteScreen} />
+        <Route path="/results" component={ResultsScreen} />
+        <Redirect from={"/:any", "/"} to={{ pathname: "/" }} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

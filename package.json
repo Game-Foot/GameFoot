@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Game-Foot/GameFoot/issues"
   },
-  "homepage": "https://github.com/Game-Foot/GameFoot#readme"
+  "homepage": "https://github.com/Game-Foot/GameFoot#readme",
+  "dependencies": {
+    "react-router-dom": "^5.2.0"
+  }
 }
