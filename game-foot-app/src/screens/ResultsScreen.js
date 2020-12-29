@@ -1,6 +1,6 @@
 // Where players see their results.
 
-import '../styles/App.css';
+import '../styles/styles.css';
 
 function ResultsScreen () {
 

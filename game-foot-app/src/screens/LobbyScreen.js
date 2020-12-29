@@ -1,6 +1,6 @@
 // Lobby screen where players will wait for a game to start.
 
-import '../styles/App.css';
+import '../styles/styles.css';
 
 function LobbyScreen () {
 

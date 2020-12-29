@@ -1,0 +1,120 @@
+:root{
+  --background1: #160f29;
+  --background2: #246a73;
+  --background3: #368f8b;
+  --background4: #f3dfc1;
+  --background5: #ddbea8;
+  --light: #eeeeee; 
+  --dark: #101a1e; 
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/* JOIN SCREEN */
+.joinScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.joinScreenTopThird {
+  background-color: var(--background1);
+  width: 100%;
+  height: 33.33vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.joinScreenTitleLogo {
+  font-size: 120px;
+  color: var(--light);
+  font-style: italic;
+  font-weight: bolder;
+  filter: drop-shadow(5px 5px 0px var(--background2));
+  animation: appLogoWaveIntro 1.5s linear;
+}
+
+.joinScreenmiddleThird {
+  background-color: var(--background2);
+  width: 100%;
+  height: 33.33vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.joinScreenPlayButton {
+  background-color: var(--background1) !important;
+  color: var(--light) !important;
+}
+
+.joinScreenPlayButton:hover {
+  background-color: var(--background3) !important;
+}
+
+.joinScreenPlayButton:active {
+  background-color: var(--background4) !important;
+  color: var(--dark) !important;
+}
+
+.joinScreenModalButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.joinScreenUserOptions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.joinScreenUsernameLabel {
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 3%;
+}
+
+.joinScreenBottomThird {
+  background-color: var(--background3);
+  width: 100%;
+  height: 33.33vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+/* ANIMATIONS */
+@keyframes appLogoWaveIntro {
+  0% {
+    transform: scaleY(0.1);
+  }
+  30% {
+    transform: scaleY(1.3);
+  }
+  60% {
+    transform: scaleY(1.2);
+  }
+  100% {
+    transform: scaleY(1.0);
+  }
+}
