@@ -4,7 +4,7 @@
 import './styles/styles.css';
 import 'semantic-ui-css/semantic.min.css'
 // React stuff
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // Screens
 import JoinScreen from "./screens/JoinScreen.js";
 import LobbyScreen from "./screens/LobbyScreen.js";

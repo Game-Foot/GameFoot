@@ -103,6 +103,86 @@
   user-select: none;
 }
 
+/* LOBBY SCREEN */
+.lobbyScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-image: linear-gradient(var(--background1), var(--background3));
+  width: 100%;
+  height: 100vh;
+}
+
+.lobbyScreenTop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -5%;
+}
+
+.lobbyJoinGameText {
+  color: var(--light);
+}
+
+.lobbyGameCodeText {
+  font-weight: bolder;
+  font-size: 60px;
+  color: var(--light);
+  filter: drop-shadow(3px 3px 0px var(--background3));
+  margin-top: -15%;
+}
+
+.lobbyScreenMiddle {
+  margin-top: -5%;
+}
+
+.lobbyScreenTitleLogo {
+  font-size: 150px;
+  color: var(--light);
+  font-style: italic;
+  font-weight: bolder;
+  filter: drop-shadow(5px 5px 0px var(--background3));
+}
+
+.lobbyScreenBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+/* PLAYER ICON */
+.playerIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  padding: 1%;
+  filter: drop-shadow(0px 0px 20px var(--dark));
+}
+
+.playerIconName {
+  font-size: 22px;
+  width: 150px;
+  text-anchor: middle;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: var(--light);
+  filter: drop-shadow(1px 1px 0px var(--dark));
+}
+
+.playerIconPicture {
+  width: 150px;
+  height: 150px;
+}
+
 /* ANIMATIONS */
 @keyframes appLogoWaveIntro {
   0% {

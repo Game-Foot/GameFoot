@@ -11,16 +11,27 @@ function JoinScreen () {
 
   const [joinModalOpenStatus, setJoinModalOpenStatus] = useState(false);
   const [hostModalOpenStatus, setHostModalOpenStatus] = useState(false);
-  const [isHosting, setHostingStatus] = useState(null);
+  const [hostCode, setHostCode] = useState("");
+
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   const joinGame = () => {
     setJoinModalOpenStatus(false);
-    setHostingStatus(false);
+    // setHostingStatus(false);
   }
 
   const hostGame = () => {
     setHostModalOpenStatus(false);
-    setHostingStatus(true);
+    // setHostingStatus(true);
+  }
+
+  const generateHostCode = () => {
+    let code = "";
+    for (let i = 0; i < 4; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    console.log(code);
+    setHostCode(code);
   }
 
   return (
@@ -43,7 +54,7 @@ function JoinScreen () {
               Join Game
               <br></br>
               <br></br>
-              <div class="ui input"><input type="text" width="35" placeholder="Enter room code..." style={{backgroundColor: "var(--light)"}}/></div>
+              <div className="ui input"><input type="text" width="35" placeholder="Enter room code..." style={{backgroundColor: "var(--light)"}}/></div>
           </Header>
           <Modal.Actions className="joinScreenModalButtonContainer">
             <Button color="teal" onClick={joinGame}><Icon name='user plus'/>Join!</Button>
@@ -53,7 +64,7 @@ function JoinScreen () {
 
         <div className="joinScreenUserOptions">
           <p className="joinScreenUsernameLabel">User Profile</p>
-          <div class="ui input"><input type="text" width="35" placeholder="Enter username..." style={{backgroundColor: "var(--light)"}}/></div>
+          <div className="ui input"><input type="text" width="35" placeholder="Enter username..." style={{backgroundColor: "var(--light)"}}/></div>
           <br></br>
           <button className="ui button large joinScreenPlayButton">Upload Picture</button>
         </div>
@@ -64,14 +75,14 @@ function JoinScreen () {
           onOpen={() => setHostModalOpenStatus(true)}
           open={hostModalOpenStatus}
           size='small'
-          trigger={<button className="ui button massive joinScreenPlayButton">Host Game</button>}>
+          trigger={<button className="ui button massive joinScreenPlayButton" onClick={generateHostCode}>Host Game</button>}>
           <Header icon><Icon className='large users' />
               Host Game
               <br></br>
-              <h1>Room Code: 012345</h1>
+              <h1>Room Code: {hostCode}</h1>
           </Header>
           <Modal.Actions className="joinScreenModalButtonContainer">
-            <Link to={{ pathname: "/lobby/012345" }}>
+            <Link to={{ pathname: "/lobby/" + hostCode }}>
               <Button color="teal" onClick={hostGame}><Icon name='users'/>Host!</Button>
             </Link>
             <Button color="secondary"><Icon name='setting'/>Options</Button>
