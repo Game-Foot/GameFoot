@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Game-Foot/GameFoot#readme",
   "dependencies": {
+    "react-device-detect": "^1.15.0",
     "react-router-dom": "^5.2.0"
   }
 }

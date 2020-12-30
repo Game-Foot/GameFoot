@@ -14,6 +14,7 @@ function App() {
   }
 
   return (
+    <body>
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={JoinScreen} />
@@ -23,6 +24,10 @@ function App() {
         <Redirect from={"/:any", "/"} to={{ pathname: "/" }} />
       </Switch>
     </BrowserRouter>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="src/client.js"></script>
+    </body>
   );
 }
 
