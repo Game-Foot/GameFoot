@@ -8,7 +8,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // Screens
 import JoinScreen from "./screens/JoinScreen.js";
 import LobbyScreen from "./screens/LobbyScreen.js";
-import VoteScreen from "./screens/VoteScreen.js";
+import GameScreen from "./screens/GameScreen.js";
 import ResultsScreen from "./screens/ResultsScreen.js";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={JoinScreen} />
         <Route path="/lobby/:any" component={LobbyScreen} />
-        <Route path="/vote" component={VoteScreen} />
+        <Route path="/game/:any" component={GameScreen} />
         <Route path="/results" component={ResultsScreen} />
       </Switch>
     </BrowserRouter>

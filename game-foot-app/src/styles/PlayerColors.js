@@ -9,4 +9,5 @@ export const PLAYER_COLORS = [
     "aqua",
     "royalblue",
     "midnightblue",
+    "gray",
 ];

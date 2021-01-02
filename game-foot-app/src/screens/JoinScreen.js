@@ -49,7 +49,7 @@ function JoinScreen () {
           onOpen={() => setJoinModalOpenStatus(true)}
           open={joinModalOpenStatus}
           size='small'
-          trigger={<button className="ui button massive joinScreenPlayButton" onClick={joinGame}>Join Game</button>}>
+          trigger={<button className="ui button massive darkClickButton" onClick={joinGame}>Join Game</button>}>
           <Header icon><Icon className='large user plus' />
               Join Game
               <br></br>
@@ -66,16 +66,15 @@ function JoinScreen () {
           <p className="joinScreenUsernameLabel">User Profile</p>
           <div className="ui input"><input type="text" width="35" placeholder="Enter username..." style={{backgroundColor: "var(--light)"}}/></div>
           <br></br>
-          <button className="ui button large joinScreenPlayButton">Upload Picture</button>
+          <button className="ui button large darkClickButton">Upload Picture</button>
         </div>
-
         <Modal
           basic
           onClose={() => setHostModalOpenStatus(false)}
           onOpen={() => setHostModalOpenStatus(true)}
           open={hostModalOpenStatus}
           size='small'
-          trigger={<button className="ui button massive joinScreenPlayButton" onClick={generateHostCode}>Host Game</button>}>
+          trigger={<button className="ui button massive darkClickButton" onClick={generateHostCode}>Host Game</button>}>
           <Header icon><Icon className='large users' />
               Host Game
               <br></br>
@@ -89,7 +88,6 @@ function JoinScreen () {
             <Button inverted color='red' onClick={() => setHostModalOpenStatus(false)}><Icon name='remove' />Close</Button>
           </Modal.Actions>
         </Modal>
-
       </div>
 
       {/* Bottom Third */}
