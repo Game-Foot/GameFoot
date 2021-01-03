@@ -5,8 +5,11 @@ import '../styles/styles.css';
 // React Stuff
 import React from "react";
 import { DragDropContext, Droppable, Draggable } from "../../node_modules/react-beautiful-dnd"
+import { Modal, Icon, Header, Divider } from 'semantic-ui-react';
 
 function GameScreen () {
+
+  let gameCode = window.location.href.substring(window.location.href.length - 4, window.location.href.length);
 
   // TEMPORARY - FIGURE OUT PASSING PLAYER DATA THROUGH PROPS/JSON FILE!
   let players = [
@@ -29,8 +32,8 @@ function GameScreen () {
 
   const getListStyle = () => ({
     background: "var(--background1)",
-    padding: "0.5%",
-    width: 500
+    padding: "1%",
+    width: "40vw"
   });
 
   const getItemStyle = (isDragging, draggableStyle) => ({
@@ -46,6 +49,26 @@ function GameScreen () {
 
   return (
       <div className="gameScreen">
+
+        <div className="gameScreenLeft">
+          <div className="gameScreenJoinMsg">
+            <p>Join the fun!</p>
+            <p>{gameCode}</p>
+          </div>
+          <div className="gameScreenQuestion">
+            <h3>FORMAT: TOP 3</h3>
+            <p>Question 1</p>
+            <p>Who is the most likely to get laid this week?</p>
+          </div>
+          <div className="ui divider"></div>
+          <div className="gameScreenLeftBottom">
+            <p>"User Name"</p>
+            <button className="ui button massive darkClickButton" ><Icon name='lock' />LOCK IN</button>
+          </div>
+        </div>
+
+        <div className="gameScreenRight">
+          <p>Rank your friends!</p>
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="voteScreenDroppable">
             {(provided, snapshot) => (
@@ -76,6 +99,8 @@ function GameScreen () {
             )}
             </Droppable>
           </DragDropContext>
+        </div>
+          
       </div>
   );
 }

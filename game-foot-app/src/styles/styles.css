@@ -197,11 +197,44 @@
 /* GAME SCREEN */
 .gameScreen {
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: var(--background6);
+  height: 100vh;
+}
+
+.gameScreenLeft {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--background6);
-  height: 100vh;
+}
+
+.gameScreenRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameScreenJoinMsg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameScreenQuestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameScreenLeftBottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ANIMATIONS */
