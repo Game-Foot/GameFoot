@@ -21,12 +21,10 @@ function GameScreen () {
     ]
 
   const onDragEnd = (result) => {
-    // dropped outside the list
-    if (!result.destination) {
-      return;
-    }
-    // test print
-    console.log(result);
+    if (!result.destination) { return; }
+    // Re-order list to reflect drag.
+    let removed = players.splice( result.source.index, 1)[0];
+    players.splice(result.destination.index, 0, removed);
   }
 
   const getListStyle = () => ({
@@ -40,21 +38,16 @@ function GameScreen () {
     userSelect: "none",
     padding: 16,
     margin: `0 0 $8px 0`,
-  
     // change background colour if dragging
     background: isDragging ? "var(--background3)" : "var(--background2)",
-  
     // styles we need to apply on draggables
     ...draggableStyle
   });
 
   return (
       <div className="gameScreen">
-          <p>Game Screen!</p>
-          <p>hey yea you the guy and the cool guy and the check out this cool dragging wow very nice and ha ha yeah very crispy and yeah and the uhhhh and the yep ha ha maybe</p>
-          <p>this currently does not actually re-order anything because onDragEnd() is not configured to actually change the state of the list of players</p>
           <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
+            <Droppable droppableId="voteScreenDroppable">
             {(provided, snapshot) => (
               <div
               {...provided.droppableProps}
@@ -62,7 +55,7 @@ function GameScreen () {
               style={getListStyle(snapshot.isDraggingOver)}
               >
                 {players.map((playerName, index) => (
-                  <Draggable key={index} draggableId={playerName} index={index}>
+                  <Draggable key={index} draggableId={players.indexOf(playerName).toString()} index={index}>
                     {(provided, snapshot) => (
                       <div
                         ref={provided.innerRef}

@@ -30,7 +30,7 @@ function JoinScreen () {
     for (let i = 0; i < 4; i++) {
       code += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-    console.log(code);
+    // console.log(code);
     setHostCode(code);
   }
 
@@ -84,7 +84,7 @@ function JoinScreen () {
             <Link to={{ pathname: "/lobby/" + hostCode }}>
               <Button color="teal" onClick={hostGame}><Icon name='users'/>Host!</Button>
             </Link>
-            <Button color="secondary"><Icon name='setting'/>Options</Button>
+            <Button className="secondary"><Icon name='setting'/>Options</Button>
             <Button inverted color='red' onClick={() => setHostModalOpenStatus(false)}><Icon name='remove' />Close</Button>
           </Modal.Actions>
         </Modal>
