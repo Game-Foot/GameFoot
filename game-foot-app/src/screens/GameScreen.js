@@ -11,6 +11,7 @@ import { Modal, Icon, Header } from 'semantic-ui-react';
 function GameScreen () {
 
   let gameCode = window.location.href.substring(window.location.href.length - 4, window.location.href.length);
+  let locked = false;
 
   // TEMPORARY - FIGURE OUT PASSING PLAYER DATA THROUGH PROPS/JSON FILE!
   let players = [
@@ -23,6 +24,14 @@ function GameScreen () {
       ["NukedHyenas", 6],
       ["AipomMaster", 7],
     ]
+
+  const lockAnswers = () => {
+    locked = true;
+    let lockButton = document.getElementById("lockButton");
+    lockButton.innerHTML = "LOCKED";
+    lockButton.classList.remove("darkClickButton");
+    lockButton.classList.add("disabled");
+  }
 
   const onDragEnd = (result) => {
     if (!result.destination) { return; }
@@ -102,7 +111,7 @@ function GameScreen () {
           
           <div className="gameScreenBottomButton">
             <div className="gameScreenDivider ui divider"></div>
-            <button className="ui button massive darkClickButton" ><Icon name='lock' />LOCK IN</button>
+            <button id="lockButton" className="ui button massive darkClickButton" onClick={lockAnswers}><Icon name="lock" />LOCK IN</button>
             <div className="gameScreenDivider ui divider"></div>
           </div>
         </div>

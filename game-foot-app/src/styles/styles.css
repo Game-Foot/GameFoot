@@ -187,7 +187,19 @@
   justify-content: center;
   border-radius: 25px;
   padding: 1%;
+  filter: drop-shadow(0px 0px 2px var(--dark));
+}
+
+.playerIconRising {
+  animation: iconRise 0.15s ease-out 1;
+  animation-fill-mode: forwards;
   filter: drop-shadow(0px 0px 20px var(--dark));
+}
+
+.playerIconFalling {
+  animation: iconFall 0.15s ease-in 1;
+  animation-fill-mode: forwards;
+  filter: drop-shadow(0px 0px 2px var(--dark));
 }
 
 .playerIconName {
@@ -200,11 +212,13 @@
   overflow: hidden;
   color: var(--light);
   filter: drop-shadow(1px 1px 0px var(--dark));
+  user-select: none;
 }
 
 .playerIconPicture {
   width: 150px;
   height: 150px;
+  user-select: none;
 }
 
 /* GAME SCREEN */
@@ -333,5 +347,23 @@
   }
   100% {
     transform: scaleY(1.0);
+  }
+}
+
+@keyframes iconRise {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-30px);
+  }
+}
+
+@keyframes iconFall {
+  0% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }

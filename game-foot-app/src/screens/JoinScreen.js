@@ -11,6 +11,7 @@ function JoinScreen () {
 
   const [joinModalOpenStatus, setJoinModalOpenStatus] = useState(false);
   const [hostModalOpenStatus, setHostModalOpenStatus] = useState(false);
+  const [uploadPicModalOpenStatus, setUploadPicModalOpenStatus] = useState(false);
   const [hostCode, setHostCode] = useState("");
 
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -66,7 +67,27 @@ function JoinScreen () {
           <p className="joinScreenUsernameLabel">User Profile</p>
           <div className="ui input"><input type="text" width="35" placeholder="Enter username..." style={{backgroundColor: "var(--light)"}}/></div>
           <br></br>
-          <button className="ui button large darkClickButton">Upload Picture</button>
+
+          <Modal
+          basic
+          onClose={() => setUploadPicModalOpenStatus(false)}
+          onOpen={() => setUploadPicModalOpenStatus(true)}
+          open={uploadPicModalOpenStatus}
+          size='small'
+          trigger={<button className="ui button large darkClickButton">Upload Picture</button>}>
+          <Header icon><Icon className='large users' />
+              Upload Profile Picture
+              <br></br>
+              <br></br>
+              <div className="ui input"><input type="text" width="35" placeholder="Paste URL here" style={{backgroundColor: "var(--light)"}}/></div>
+          </Header>
+          <Modal.Actions className="joinScreenModalButtonContainer">
+            <Button color="teal" onClick={() => setUploadPicModalOpenStatus(false)}><Icon name='picture' />Set Picture</Button>
+            <Button inverted color='red' onClick={() => setUploadPicModalOpenStatus(false)}><Icon name='remove' />Cancel</Button>
+          </Modal.Actions>
+        </Modal>
+
+
         </div>
         <Modal
           basic

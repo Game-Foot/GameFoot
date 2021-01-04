@@ -5,8 +5,20 @@ import { PLAYER_COLORS } from "../styles/PlayerColors.js";
 
 function PlayerIcon (props) {
 
+  const mouseOver = () => {
+    document.getElementsByClassName("playerIcon")[props.index].classList.add("playerIconRising");
+    document.getElementsByClassName("playerIcon")[props.index].classList.remove("playerIconFalling");
+    document.getElementsByClassName("playerIconName")[props.index].style.fontWeight = "bold";
+  }
+
+  const mouseOut = () => {
+    document.getElementsByClassName("playerIcon")[props.index].classList.add("playerIconFalling");
+    document.getElementsByClassName("playerIcon")[props.index].classList.remove("playerIconRising");
+    document.getElementsByClassName("playerIconName")[props.index].style.fontWeight = "normal";
+  }
+
   return (
-      <div className="playerIcon" style={{backgroundColor: PLAYER_COLORS[props.index]}}>
+      <div className="playerIcon" style={{backgroundColor: PLAYER_COLORS[props.index]}} onMouseOver={mouseOver} onMouseOut={mouseOut}>
           <p className="playerIconName">{props.playerName}</p>
           {/* <img className="playerIconPicture" alt="r" src=
             {props.index != 0 ? 
