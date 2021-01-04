@@ -2,10 +2,11 @@
 
 // Our Stylings
 import '../styles/styles.css';
+import { PLAYER_COLORS } from "../styles/PlayerColors.js";
 // React Stuff
 import React from "react";
 import { DragDropContext, Droppable, Draggable } from "../../node_modules/react-beautiful-dnd"
-import { Modal, Icon, Header, Divider } from 'semantic-ui-react';
+import { Modal, Icon, Header } from 'semantic-ui-react';
 
 function GameScreen () {
 
@@ -13,14 +14,14 @@ function GameScreen () {
 
   // TEMPORARY - FIGURE OUT PASSING PLAYER DATA THROUGH PROPS/JSON FILE!
   let players = [
-      "RJ",
-      "MetallicaFan420",
-      "Arrjay",
-      "Sleeves",
-      "Paprino",
-      "Zuniceratops",
-      "NukedHyenas",
-      "AipomMaster",
+      ["RJ", 0],
+      ["MetallicaFan420", 1],
+      ["Arrjay", 2],
+      ["Sleeves", 3],
+      ["Paprino", 4],
+      ["Zuniceratops", 5],
+      ["NukedHyenas", 6],
+      ["AipomMaster", 7],
     ]
 
   const onDragEnd = (result) => {
@@ -30,20 +31,11 @@ function GameScreen () {
     players.splice(result.destination.index, 0, removed);
   }
 
-  const getListStyle = () => ({
-    background: "var(--background1)",
-    padding: "1%",
-    width: "40vw"
-  });
-
-  const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
-    userSelect: "none",
-    padding: 16,
-    margin: `0 0 $8px 0`,
-    // change background colour if dragging
-    background: isDragging ? "var(--background3)" : "var(--background2)",
-    // styles we need to apply on draggables
+  const getItemStyle = (isDragging, draggableStyle, playerInfo, index) => ({
+    padding: 20.2,
+    margin: `0 0 11px 0`,
+    background: isDragging ? "var(--background4)" : PLAYER_COLORS[playerInfo[1]],
+    filter: index < 3 ? "" : "grayscale(75%)",
     ...draggableStyle
   });
 
@@ -52,53 +44,67 @@ function GameScreen () {
 
         <div className="gameScreenLeft">
           <div className="gameScreenJoinMsg">
-            <p>Join the fun!</p>
-            <p>{gameCode}</p>
+            <h2 className="gameJoinGameText">Join the fun!</h2>
+            <p className="gameGameCodeText">{gameCode}</p>
           </div>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
           <div className="gameScreenQuestion">
-            <h3>FORMAT: TOP 3</h3>
-            <p>Question 1</p>
-            <p>Who is the most likely to get laid this week?</p>
+            <h1>FORMAT: TOP 3</h1>
+            <h1 className="gameScreenQuestionText">Question 1: Who is the most likely to get laid this week?</h1>
           </div>
           <div className="ui divider"></div>
-          <div className="gameScreenLeftBottom">
-            <p>"User Name"</p>
-            <button className="ui button massive darkClickButton" ><Icon name='lock' />LOCK IN</button>
-          </div>
+
         </div>
 
         <div className="gameScreenRight">
-          <p>Rank your friends!</p>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="voteScreenDroppable">
-            {(provided, snapshot) => (
-              <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              style={getListStyle(snapshot.isDraggingOver)}
-              >
-                {players.map((playerName, index) => (
-                  <Draggable key={index} draggableId={players.indexOf(playerName).toString()} index={index}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={getItemStyle(
-                          snapshot.isDragging,
-                          provided.draggableProps.style
+          <p className="rankYourFriends">Rank your friends!</p>
+          <div className="gameScreenDragContainer">
+            <div className="gameScreenTop3Text">
+              <p style={{marginBottom: "30%"}}>#1</p>
+              <p style={{marginBottom: "30%"}}>#2</p>
+              <p>#3</p>
+            </div>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="voteScreenDroppable">
+                {(provided, snapshot) => (
+                  <div className="draggableBoxBackground"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  >
+                    {players.map((playerInfo, index) => (
+                      <Draggable key={index} draggableId={players.indexOf(playerInfo).toString()} index={index}>
+                        {(provided, snapshot) => (
+                          <div className="draggableItem"
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style,
+                              playerInfo,
+                              index
+                            )}
+                          >
+                            {playerInfo[0]}
+                          </div>
                         )}
-                      >
-                        {playerName}
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-            </Droppable>
-          </DragDropContext>
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+                </Droppable>
+            </DragDropContext>
+          </div>
+          
+          <div className="gameScreenBottomButton">
+            <div className="gameScreenDivider ui divider"></div>
+            <button className="ui button massive darkClickButton" ><Icon name='lock' />LOCK IN</button>
+            <div className="gameScreenDivider ui divider"></div>
+          </div>
         </div>
           
       </div>

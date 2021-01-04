@@ -92,8 +92,12 @@ function JoinScreen () {
 
       {/* Bottom Third */}
       <div className="joinScreenBottomThird">
-        <p>by Chris Hopkins, Jacob Gruza &amp; Tian Brown</p>
-        <p>&#169; 2021 Game Foot Enterprises</p>
+        <p>&#169; 2021 Game Foot Inc.</p>
+        <p>gamefootbusiness@gmail.com</p>
+        <div className="twitter">
+          <img className="twitterPic" src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/twitter-128.png" alt="r"></img>
+          <p>&nbsp; @GameFootInc1</p>
+        </div>
       </div>
     </div>
   );

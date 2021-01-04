@@ -8,6 +8,6 @@ export const PLAYER_COLORS = [
     "forestgreen",
     "aqua",
     "royalblue",
-    "midnightblue",
+    "blueviolet",
     "gray",
 ];

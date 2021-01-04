@@ -105,6 +105,17 @@
   user-select: none;
 }
 
+.twitter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.twitterPic {
+  width: 25px;
+  height: 25px;
+}
+
 /* LOBBY SCREEN */
 .lobbyScreen {
   display: flex;
@@ -126,6 +137,7 @@
 
 .lobbyJoinGameText {
   color: var(--light);
+  user-select: none;
 }
 
 .lobbyGameCodeText {
@@ -142,6 +154,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  user-select: none;
 }
 
 .lobbyScreenTitleLogo {
@@ -229,12 +242,82 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: var(--background1);
+  color: var(--background6);
+  padding: 6%;
+  user-select: none;
 }
 
-.gameScreenLeftBottom {
+.gameScreenBottomButton {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  margin-top: 4%;
+  width: 40vw;
+}
+
+.draggableBoxBackground {
+  width: 40vw;
+  height: 60vh;
+  background-color: var(--background2);
+  padding: 1%;
+}
+
+.rankYourFriends {
+  font-size: 36px;
+  font-style: italic;
+  font-weight: bold;
+  user-select: none;
+}
+
+.draggableItem {
+  font-size: 18px;
+  font-weight: bold;
+  user-select: none;
+  filter: drop-shadow(3px 3px 3px var(--background1));
+  color: var(--background1);
+}
+
+.gameScreenDivider {
+  width: 30%;
+  background-color: var(--background1) !important;
+}
+
+.gameScreenDragContainer {
+  display: flex;
+  padding: 4%;
+  border-width: 2px;
+  border-style: solid;
+  background-color: var(--background1);
+}
+
+.gameScreenTop3Text {
+  flex-direction: column;
+  font-size: 40px;
+  font-weight: bolder;
+  margin-right: 1.5%;
+  margin-top: 1%;
+  color: var(--background6);
+  user-select: none;
+}
+
+.gameJoinGameText {
+  color: var(--background1);
+  user-select: none;
+}
+
+.gameGameCodeText {
+  font-weight: bolder;
+  font-size: 60px;
+  color: var(--background1);
+  filter: drop-shadow(3px 3px 0px var(--background3));
+  margin-top: -15%;
+}
+
+.gameScreenQuestionText {
+  width: 30vw;
+  text-anchor: middle;
+  text-align: center;
 }
 
 /* ANIMATIONS */
