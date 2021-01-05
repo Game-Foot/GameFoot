@@ -13,17 +13,16 @@ function JoinScreen () {
   const [hostModalOpenStatus, setHostModalOpenStatus] = useState(false);
   const [uploadPicModalOpenStatus, setUploadPicModalOpenStatus] = useState(false);
   const [hostCode, setHostCode] = useState("");
+  const [joinCode, setJoinCode] = useState("");
 
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   const joinGame = () => {
     setJoinModalOpenStatus(false);
-    // setHostingStatus(false);
   }
 
   const hostGame = () => {
     setHostModalOpenStatus(false);
-    // setHostingStatus(true);
   }
 
   const generateHostCode = () => {
@@ -31,7 +30,6 @@ function JoinScreen () {
     for (let i = 0; i < 4; i++) {
       code += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-    // console.log(code);
     setHostCode(code);
   }
 
@@ -50,15 +48,19 @@ function JoinScreen () {
           onOpen={() => setJoinModalOpenStatus(true)}
           open={joinModalOpenStatus}
           size='small'
-          trigger={<button className="ui button massive darkClickButton" onClick={joinGame}>Join Game</button>}>
+          trigger={<button className="ui button massive darkClickButton">Join Game</button>}>
           <Header icon><Icon className='large user plus' />
               Join Game
               <br></br>
               <br></br>
-              <div className="ui input"><input type="text" width="35" placeholder="Enter room code..." style={{backgroundColor: "var(--light)"}}/></div>
+              <div className="ui input">
+                <input onKeyUp={(e) => setJoinCode(e.target.value)} maxlength="4" type="text" placeholder="Enter room code..." style={{backgroundColor: "var(--light)"}}/>
+              </div>
           </Header>
           <Modal.Actions className="joinScreenModalButtonContainer">
-            <Button color="teal" onClick={joinGame}><Icon name='user plus'/>Join!</Button>
+            <Link to={{ pathname: "/lobby/" + joinCode }}>
+              <Button color="teal" onClick={joinGame}><Icon name='user plus'/>Join!</Button>
+            </Link>
             <Button inverted color='red' onClick={() => setJoinModalOpenStatus(false)}><Icon name='remove' />Close</Button>
           </Modal.Actions>
         </Modal>
