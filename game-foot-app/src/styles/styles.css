@@ -226,7 +226,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  background-color: var(--background6);
+  background-image: linear-gradient(var(--background1), var(--background3));
   height: 100vh;
 }
 
@@ -249,17 +249,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.gameScreenQuestion {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--background1);
-  color: var(--background6);
-  padding: 6%;
-  user-select: none;
+  margin-top: 5%;
 }
 
 .gameScreenBottomButton {
@@ -273,7 +263,6 @@
 .draggableBoxBackground {
   width: 40vw;
   height: 60vh;
-  background-color: var(--background2);
   padding: 1%;
 }
 
@@ -282,6 +271,7 @@
   font-style: italic;
   font-weight: bold;
   user-select: none;
+  color: var(--light);
 }
 
 .draggableItem {
@@ -300,9 +290,6 @@
 .gameScreenDragContainer {
   display: flex;
   padding: 4%;
-  border-width: 2px;
-  border-style: solid;
-  background-color: var(--background1);
 }
 
 .gameScreenTop3Text {
@@ -311,27 +298,49 @@
   font-weight: bolder;
   margin-right: 1.5%;
   margin-top: 1%;
-  color: var(--background6);
+  color: var(--light);
   user-select: none;
+  text-align: right;
 }
 
 .gameJoinGameText {
-  color: var(--background1);
   user-select: none;
+  color: var(--light);
 }
 
 .gameGameCodeText {
   font-weight: bolder;
-  font-size: 60px;
-  color: var(--background1);
+  font-size: 50px;
+  color: var(--light);
   filter: drop-shadow(3px 3px 0px var(--background3));
   margin-top: -15%;
 }
 
-.gameScreenQuestionText {
-  width: 30vw;
-  text-anchor: middle;
+.gameScreenQuestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--light);
+  padding: 6%;
+  user-select: none;
   text-align: center;
+  width: 35vw;
+}
+
+.gameScreenFormat {
+  font-size: 36px;
+  filter: drop-shadow(3px 3px 0px var(--background3));
+  margin-bottom: 0%;
+}
+
+.gameScreenQuestionText {
+  font-size: 75px;
+}
+
+.timeRemaining {
+  font-size: 90px;
+  filter: drop-shadow(3px 3px 0px var(--background1));
 }
 
 /* ANIMATIONS */
