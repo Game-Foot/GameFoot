@@ -14,6 +14,7 @@ const io = socketio(server);
 
 const scoring = require('./scoring');
 const prompts = require('./prompts');
+const { POINT_CONVERSION_UNCOMPRESSED } = require('constants');
 
 // Contains all of the room codes and server instances
 roomCodes = {};
@@ -34,9 +35,10 @@ io.on('connection', (sock) => {
 });
 
 // plebs, 1 is succesful connection and 0 is no lobby found or blacklisted
-io.on('joinLobby', (lobby,name,pic,time,sock) => {
+io.on('joinLobby', (lobby,username,picture,timeJoin,sock) => {
   if(lobby in roomCodes){ // && not blacklisted
-    roomCodes[lobby].players.push([name,sock.id,pic,time,0]);
+    newUser = {name:username, id:sock.id, pic:picture, time=timeJoin, points:0};
+    roomCodes[lobby].players.push([newUser]);
     socketio.emit('lobby',1);
   } 
   else{
@@ -45,9 +47,10 @@ io.on('joinLobby', (lobby,name,pic,time,sock) => {
 });
 
 // Host only
-io.on('makeLobby', (name,pic,time,sock) =>{
+io.on('makeLobby', (username,picture,timeJoin,sock) =>{
   newCode = lobbyCodeGenerator();
-  roomCodes[newCode] = {host:[name,sock.id], players:[[name,sock.id,pic,time,0]], blacklist:[], disconnects: [], inGame=0};
+  hostUser = {name:username, id:sock.id, pic:picture, time=timeJoin, points:0};
+  roomCodes[newCode] = {host:hostUser, players:[hostUser], blacklist:[], disconnects: [], inGame=0};
   socketio.emit('codeCreated', newCode);
   sock.join(newCode);
 });
