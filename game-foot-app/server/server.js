@@ -12,6 +12,9 @@ app.use(express.static(clientPath));
 const server = http.createServer(app);
 const io = socketio(server);
 
+const scoring = require('./scoring');
+const prompts = require('./prompts');
+
 // Contains all of the room codes and server instances
 roomCodes = {};
 
@@ -21,7 +24,7 @@ io.on('connection', (sock) => {
 
   socket.on('disconnecting', () => {
     console.log(socket.rooms); // the Set contains at least the socket ID
-    
+
     // If they are in a lobby, remove profile from players
     // If they are in game, move profile from player to disconnect
     // If they are host, move profile and change host by picking next person
@@ -57,8 +60,6 @@ server.listen(8080, () => {
   console.log("Started")
 });
 
-  
-
 function lobbyCodeGenerator() {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -70,8 +71,10 @@ function lobbyCodeGenerator() {
         lobbyCodeGenerator();
     } 
     else{
-        // replace with different server instances
         return result;
     }
   }
+
+// For prompts, enter them one line at a time in a string
+promptChoices = promptWords;
 
