@@ -213,12 +213,9 @@
 }
 
 .playerIconName {
-  font-size: 22px;
+  font-size: 170%;
   width: 150px;
-  text-anchor: middle;
   text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
   color: var(--light);
   filter: drop-shadow(1px 1px 0px var(--dark));

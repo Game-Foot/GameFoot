@@ -20,45 +20,46 @@ function GameScreen () {
   const [answersLocked, setAnswerLockStatus] = useState(false);
   const [time, setTime] = useState(TIME_LIMIT);
   const [redirect, setRedirect] = useState(false);
-
-  // TEMPORARY
-  let players = [
-      ["RJ", 0],
-      ["MetallicaFan420", 1],
-      ["Arrjay", 2],
-      ["Sleeves", 3],
-      ["Paprino", 4],
-      ["Zuniceratops", 5],
-      ["NukedHyenas", 6],
-      ["AipomMaster", 7],
-    ]
+  // Temporary state to track the players.
+  const [playersState, setPlayersState] = useState([
+    ["RJ", 0],
+    ["MetallicaFan420", 1],
+    ["Arrjay", 2],
+    ["Sleeves", 3],
+    ["Paprino", 4],
+    ["Zuniceratops", 5],
+    ["NukedHyenas", 6],
+    ["AipomMaster", 7],
+  ])
 
   // Timer-Related Functions
-
   useEffect(() => {
-    const interval = setInterval(() => setTime(getTimeLeft(interval)), TIMER_DECREMENT_INTERVAL_MS);
-    return () => { clearInterval(interval); };
-  }, []);
+    const timer = setInterval(() => { getTimeLeft(time - 1, timer); }, TIMER_DECREMENT_INTERVAL_MS);
+    return () => clearInterval(timer);
+  });
 
-  const getTimeLeft = (interval) => {
-    setTime(--TIME_LIMIT);
-    if (TIME_LIMIT === 0) { timeIsUp(interval) };
-    return TIME_LIMIT;
+  const getTimeLeft = (time, timer) => {
+    setTime(time);
+    if (time === 0) { timeIsUp(timer) };
+    return time;
   }
 
-  const timeIsUp = (interval) => {
-    clearInterval(interval);
+  const timeIsUp = (timer) => {
+    clearInterval(timer);
     lockAnswers();
+    document.getElementsByClassName("timeRemaining")[0].innerHTML = `<Icon name='clock' />0`;
     window.setTimeout(() => setRedirect(true), 2000);
   }
   
   // Drag & Drop Functions
-
   const onDragEnd = (result) => {
     if (!result.destination || answersLocked) { return; }
     // Re-order list to reflect drag.
-    let removed = players.splice( result.source.index, 1)[0];
-    players.splice(result.destination.index, 0, removed);
+    let playersStateCopy = [...playersState];
+    let removed = playersStateCopy.splice( result.source.index, 1)[0];
+    playersStateCopy.splice(result.destination.index, 0, removed);
+    setPlayersState(playersStateCopy);
+    // console.log(players[0]);
   }
 
   const getItemStyle = (isDragging, draggableStyle, playerInfo, index) => ({
@@ -70,7 +71,6 @@ function GameScreen () {
   })
 
   // Function for locking user's votes.
-
   const lockAnswers = () => {
     let lockButton = document.getElementById("lockButton");
     setLockAnswersModalOpenStatus(false);
@@ -81,7 +81,6 @@ function GameScreen () {
   }
 
   // Render JSX
-
   return (
       <div className="gameScreen">
         
@@ -121,8 +120,8 @@ function GameScreen () {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                   >
-                    {players.map((playerInfo, index) => (
-                      <Draggable key={index} draggableId={players.indexOf(playerInfo).toString()} index={index}>
+                    {playersState.map((playerInfo, index) => (
+                      <Draggable key={index} draggableId={playersState.indexOf(playerInfo).toString()} index={index}>
                         {(provided, snapshot) => (
                           <div className="draggableItem"
                             ref={provided.innerRef}

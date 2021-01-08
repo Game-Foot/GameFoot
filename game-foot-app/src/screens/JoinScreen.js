@@ -65,7 +65,9 @@ function JoinScreen () {
         </Modal>
         <div className="joinScreenUserOptions">
           <p className="joinScreenUsernameLabel">User Profile</p>
-          <div className="ui input"><input type="text" width="35" placeholder="Enter username..." style={{backgroundColor: "var(--light)"}}/></div>
+          <div className="ui input">
+            <input type="text" width="35" maxlength="12" placeholder="Enter username..." style={{backgroundColor: "var(--light)"}}/>
+          </div>
           <br></br>
           <img className="joinScreenPic" alt="r" src="https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?fit=300%2C300"></img>
           <br></br>
