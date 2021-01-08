@@ -35,13 +35,12 @@ function JoinScreen () {
 
   return (
     <div className="joinScreen">
-      {/* Top Third */}
+
       <div className="joinScreenTopThird">
         <p className="joinScreenTitleLogo">STACK IT UP!</p>
       </div>
-      {/* Middle Third */}
+
       <div className="joinScreenmiddleThird">
-        
         <Modal
           basic
           onClose={() => setJoinModalOpenStatus(false)}
@@ -64,14 +63,12 @@ function JoinScreen () {
             <Button inverted color='red' onClick={() => setJoinModalOpenStatus(false)}><Icon name='remove' />Close</Button>
           </Modal.Actions>
         </Modal>
-
         <div className="joinScreenUserOptions">
           <p className="joinScreenUsernameLabel">User Profile</p>
           <div className="ui input"><input type="text" width="35" placeholder="Enter username..." style={{backgroundColor: "var(--light)"}}/></div>
           <br></br>
           <img className="joinScreenPic" alt="r" src="https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?fit=300%2C300"></img>
           <br></br>
-
           <Modal
           basic
           onClose={() => setUploadPicModalOpenStatus(false)}
@@ -90,8 +87,6 @@ function JoinScreen () {
             <Button inverted color='red' onClick={() => setUploadPicModalOpenStatus(false)}><Icon name='remove' />Cancel</Button>
           </Modal.Actions>
         </Modal>
-
-
         </div>
         <Modal
           basic
@@ -115,7 +110,6 @@ function JoinScreen () {
         </Modal>
       </div>
 
-      {/* Bottom Third */}
       <div className="joinScreenBottomThird">
         <p>&#169; 2021 Game Foot Inc.</p>
         <p>gamefootbusiness@gmail.com</p>

@@ -13,7 +13,7 @@ function LobbyScreen () {
 
   let gameCode = window.location.href.substring(window.location.href.length - 4, window.location.href.length);
 
-  // TEMPORARY - FIGURE OUT PASSING PLAYER DATA THROUGH PROPS/JSON FILE!
+  // TEMPORARY
   let players = [
     "RJ",
     "MetallicaFan420",

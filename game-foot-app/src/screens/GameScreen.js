@@ -7,17 +7,21 @@ import { PLAYER_COLORS } from "../styles/PlayerColors.js";
 import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from "../../node_modules/react-beautiful-dnd"
 import { Modal, Icon, Header, Button } from 'semantic-ui-react';
+import { Redirect } from 'react-router-dom';
 
 function GameScreen () {
 
   var gameCode = window.location.href.substring(window.location.href.length - 4, window.location.href.length);
-  var TIME_LIMIT = 90;
-
+  // Time settings
+  var TIME_LIMIT = 30;
+  var WARNING_TIME = 7;
+  var TIMER_DECREMENT_INTERVAL_MS = 1000;
   const [lockAnswersModalOpenStatus, setLockAnswersModalOpenStatus] = useState(false);
   const [answersLocked, setAnswerLockStatus] = useState(false);
   const [time, setTime] = useState(TIME_LIMIT);
+  const [redirect, setRedirect] = useState(false);
 
-  // TEMPORARY - FIGURE OUT PASSING PLAYER DATA THROUGH PROPS/JSON FILE!
+  // TEMPORARY
   let players = [
       ["RJ", 0],
       ["MetallicaFan420", 1],
@@ -29,25 +33,27 @@ function GameScreen () {
       ["AipomMaster", 7],
     ]
 
+  // Timer-Related Functions
+
   useEffect(() => {
-    const interval = setInterval(() => setTime(getTimeLeft()), 1000);
+    const interval = setInterval(() => setTime(getTimeLeft(interval)), TIMER_DECREMENT_INTERVAL_MS);
     return () => { clearInterval(interval); };
   }, []);
 
-  const getTimeLeft = () => {
-    TIME_LIMIT--
+  const getTimeLeft = (interval) => {
+    setTime(--TIME_LIMIT);
+    if (TIME_LIMIT === 0) { timeIsUp(interval) };
     return TIME_LIMIT;
   }
 
-  const lockAnswers = () => {
-    let lockButton = document.getElementById("lockButton");
-    setLockAnswersModalOpenStatus(false);
-    setAnswerLockStatus(true);
-    lockButton.innerHTML = "LOCKED";
-    lockButton.classList.remove("darkClickButton");
-    lockButton.classList.add("disabled");
+  const timeIsUp = (interval) => {
+    clearInterval(interval);
+    lockAnswers();
+    window.setTimeout(() => setRedirect(true), 2000);
   }
   
+  // Drag & Drop Functions
+
   const onDragEnd = (result) => {
     if (!result.destination || answersLocked) { return; }
     // Re-order list to reflect drag.
@@ -61,10 +67,26 @@ function GameScreen () {
     background: isDragging ? "var(--background4)" : PLAYER_COLORS[playerInfo[1]],
     filter: answersLocked ? "grayscale(100%) brightness(0.6)" : (index < 3 ? "" : "grayscale(75%)"),
     ...draggableStyle
-  });
+  })
+
+  // Function for locking user's votes.
+
+  const lockAnswers = () => {
+    let lockButton = document.getElementById("lockButton");
+    setLockAnswersModalOpenStatus(false);
+    setAnswerLockStatus(true);
+    lockButton.innerHTML = "LOCKED";
+    lockButton.classList.remove("darkClickButton");
+    lockButton.classList.add("disabled");
+  }
+
+  // Render JSX
 
   return (
       <div className="gameScreen">
+        
+        {/* Redirect when timer has finished. */}
+        {redirect ? <Redirect to={"/results/" + gameCode}/> : null}
 
         <div className="gameScreenLeft">
           <div className="gameScreenJoinMsg">
@@ -78,7 +100,7 @@ function GameScreen () {
           <div className="gameScreenQuestion">
             <p className="gameScreenFormat">FORMAT: TOP 3</p>
             <p className="gameScreenQuestionText">Who is the most likely to get laid this week?</p>
-            <p className="timeRemaining"><Icon name='clock' />{time}</p>
+            <p className="timeRemaining" style={time <= WARNING_TIME ? {color: "red"} : {color: "white"}}><Icon name='clock' />{time}</p>
           </div>
           <div className="ui divider"></div>
 
