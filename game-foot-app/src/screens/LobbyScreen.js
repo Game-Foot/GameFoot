@@ -87,7 +87,7 @@ function LobbyScreen () {
         {/* This should probably be done in a map. */}
         <div className="lobbyScreenBottom">
           {players.map((playerName, index) => (
-            <PlayerIcon className="lobbyScreenPlayerIcon" key={index} index={index} playerName={playerName}></PlayerIcon>
+            <PlayerIcon lobby={true} key={index} index={index} playerName={playerName}></PlayerIcon>
           ))}
         </div>
           

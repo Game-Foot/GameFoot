@@ -9,28 +9,17 @@ import { DragDropContext, Droppable, Draggable } from "../../node_modules/react-
 import { Modal, Icon, Header, Button } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 
-function GameScreen () {
+function GameScreen (props) {
 
   var gameCode = window.location.href.substring(window.location.href.length - 4, window.location.href.length);
   // Time settings
-  var TIME_LIMIT = 30;
+  var TIME_LIMIT = 4;
   var WARNING_TIME = 7;
   var TIMER_DECREMENT_INTERVAL_MS = 1000;
   const [lockAnswersModalOpenStatus, setLockAnswersModalOpenStatus] = useState(false);
   const [answersLocked, setAnswerLockStatus] = useState(false);
   const [time, setTime] = useState(TIME_LIMIT);
   const [redirect, setRedirect] = useState(false);
-  // Temporary state to track the players.
-  const [playersState, setPlayersState] = useState([
-    ["RJ", 0],
-    ["MetallicaFan420", 1],
-    ["Arrjay", 2],
-    ["Sleeves", 3],
-    ["Paprino", 4],
-    ["Zuniceratops", 5],
-    ["NukedHyenas", 6],
-    ["AipomMaster", 7],
-  ])
 
   // Timer-Related Functions
   useEffect(() => {
@@ -55,11 +44,10 @@ function GameScreen () {
   const onDragEnd = (result) => {
     if (!result.destination || answersLocked) { return; }
     // Re-order list to reflect drag.
-    let playersStateCopy = [...playersState];
+    let playersStateCopy = [...props.rankingsState];
     let removed = playersStateCopy.splice( result.source.index, 1)[0];
     playersStateCopy.splice(result.destination.index, 0, removed);
-    setPlayersState(playersStateCopy);
-    // console.log(players[0]);
+    props.setRankingsState(playersStateCopy);
   }
 
   const getItemStyle = (isDragging, draggableStyle, playerInfo, index) => ({
@@ -120,8 +108,8 @@ function GameScreen () {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                   >
-                    {playersState.map((playerInfo, index) => (
-                      <Draggable key={index} draggableId={playersState.indexOf(playerInfo).toString()} index={index}>
+                    {props.rankingsState.map((playerInfo, index) => (
+                      <Draggable key={index} draggableId={props.rankingsState.indexOf(playerInfo).toString()} index={index}>
                         {(provided, snapshot) => (
                           <div className="draggableItem"
                             ref={provided.innerRef}

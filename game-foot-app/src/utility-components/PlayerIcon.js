@@ -18,7 +18,7 @@ function PlayerIcon (props) {
   }
 
   return (
-      <div className="playerIcon" style={{backgroundColor: PLAYER_COLORS[props.index]}} onMouseOver={mouseOver} onMouseOut={mouseOut}>
+      <div className="playerIcon" style={{backgroundColor: PLAYER_COLORS[props.index]}} onMouseOver={props.lobby ? mouseOver : null} onMouseOut={props.lobby ? mouseOut : null}>
           <p className="playerIconName">{props.playerName}</p>
           {/* <img className="playerIconPicture" alt="r" src=
             {props.index != 0 ? 
