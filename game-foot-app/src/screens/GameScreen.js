@@ -13,7 +13,7 @@ function GameScreen (props) {
 
   var gameCode = window.location.href.substring(window.location.href.length - 4, window.location.href.length);
   // Time settings
-  var TIME_LIMIT = 4;
+  var TIME_LIMIT = 30;
   var WARNING_TIME = 7;
   var TIMER_DECREMENT_INTERVAL_MS = 1000;
   const [lockAnswersModalOpenStatus, setLockAnswersModalOpenStatus] = useState(false);
