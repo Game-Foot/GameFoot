@@ -100,33 +100,6 @@ function JoinScreen () {
           <img className="stackItUpLogo" src={stackItUpLogo} alt="r"></img>
         </div>
 
-        {/* <div className="joinScreenUserOptions">
-          <p className="joinScreenUsernameLabel">User Profile</p>
-          <div className="ui input">
-            <input type="text" width="35" maxlength="12" placeholder="Enter username..." style={{backgroundColor: "var(--light)"}}/>
-          </div>
-          <br></br>
-          <img className="joinScreenPic" alt="r" src="https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?fit=300%2C300"></img>
-          <br></br>
-          <Modal
-          basic
-          onClose={() => setUploadPicModalOpenStatus(false)}
-          onOpen={() => setUploadPicModalOpenStatus(true)}
-          open={uploadPicModalOpenStatus}
-          size='small'
-          trigger={<button className="ui button large darkClickButton">Upload Picture</button>}>
-          <Header icon><Icon className='large users' />
-              Upload Profile Picture
-              <br></br>
-              <br></br>
-              <div className="ui input"><input type="text" width="35" placeholder="Paste URL here" style={{backgroundColor: "var(--light)"}}/></div>
-          </Header>
-          <Modal.Actions className="joinScreenModalButtonContainer">
-            <Button color="teal" onClick={() => setUploadPicModalOpenStatus(false)}><Icon name='picture' />Set Picture</Button>
-            <Button inverted color='red' onClick={() => setUploadPicModalOpenStatus(false)}><Icon name='remove' />Cancel</Button>
-          </Modal.Actions>
-        </Modal>
-        </div> */}
         <Modal
           basic
           onClose={() => setHostModalOpenStatus(false)}
@@ -143,7 +116,6 @@ function JoinScreen () {
             <Link to={{ pathname: "/lobby/" + hostCode }}>
               <Button color="teal" onClick={hostGame}><Icon name='users'/>Host!</Button>
             </Link>
-            <Button className="secondary"><Icon name='setting'/>Options</Button>
             <Button inverted color='red' onClick={() => setHostModalOpenStatus(false)}><Icon name='remove' />Close</Button>
           </Modal.Actions>
         </Modal>
@@ -155,8 +127,9 @@ function JoinScreen () {
           <img className="twitterPic" src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/twitter-128.png" alt="r"></img>
           <p>&nbsp; @GameFootInc1</p>
         </div>
-
+        <p className="flag">*For legal reasons this is not the Pan-African flag</p>
       </div>
+
     </div>
   );
 }

@@ -7,11 +7,14 @@ import PlayerIcon from "../utility-components/PlayerIcon.js";
 // React Stuff
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import { Modal, Icon, Header, Button } from 'semantic-ui-react';
+import { Modal, Icon, Header, Button, Label, Checkbox } from 'semantic-ui-react';
+// Images
+import stackItUpLogo2 from '../img/SIU Logo 2.png';
 
 function LobbyScreen () {
-
   let gameCode = window.location.href.substring(window.location.href.length - 4, window.location.href.length);
+  const MIN_PLAYERS = 4;
+  const MAX_PLAYERS = 12;
 
   // TEMPORARY
   let players = [
@@ -27,19 +30,34 @@ function LobbyScreen () {
 
   const [optionsModalOpenState, setOptionsModalOpenState] = useState(false);
   const [returnHomeModalOpenState, setReturnHomeModalOpenState] = useState(false);
+  const [numPlayers, setNumPlayers] = useState(8);
+  const [lastInputValid, setLastInputValid] = useState(true);
+
+  const changeNumPlayers = (num) => {
+    if (isNaN(num)) {
+        setNumPlayers("");
+        setLastInputValid(false)
+    }
+    else if (num >= MIN_PLAYERS && num <= MAX_PLAYERS) {
+        setNumPlayers(parseInt(num))
+        setLastInputValid(true)
+    }
+    else {
+        setLastInputValid(false)
+    }
+}
 
   return (
       <div className="lobbyScreen">
 
         <div className="lobbyScreenTop">
-          <h2 className="lobbyJoinGameText">Join In!</h2>
-          <p className="lobbyGameCodeText">{gameCode}</p>
-        </div>
-
-        <div className="lobbyScreenMiddle">
-          <p className="lobbyScreenTitleLogo">STACK IT UP!</p>
-          <div className="lobbyScreenButtonOptions">
-
+          <div className="lobbyTopLeft">
+            <h2 className="lobbyJoinGameText">Join In!</h2>
+            <p className="lobbyGameCodeText">{gameCode}</p>
+          </div>
+          <img className="stackItUpLogo2" src={stackItUpLogo2} alt=""></img>
+          <div className="lobbyTopRight">
+            <div style={{display: "flex", marginBottom: "1%"}}>
             <Modal
               basic
               onClose={() => setReturnHomeModalOpenState(false)}
@@ -59,10 +77,6 @@ function LobbyScreen () {
               </Modal.Actions>
             </Modal>
 
-            <Link to={{ pathname: "/game/" + gameCode }}>
-              <div><button className="ui button massive darkClickButton" >Start Game</button></div>
-            </Link>
-
             <Modal
               basic
               onClose={() => setOptionsModalOpenState(false)}
@@ -70,17 +84,36 @@ function LobbyScreen () {
               open={optionsModalOpenState}
               size='small'
               trigger={<div><button className="ui icon button massive darkClickButton" ><Icon name='setting' /></button></div>}>
-              <Header icon><Icon className='large settings' />
-                  Game Options
-                  <br></br>
-                  <br></br>
-                  put game options here lol
-              </Header>
+              <Header icon><Icon className='large settings' />Game Options</Header>
+              <Modal.Content style={{display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
+                Number of Players
+                <br></br><br></br>
+                <div className="ui input">
+                  <button className="ui button icon" onClick={() => changeNumPlayers(numPlayers - 1)}>
+                      <i className="angle left icon" />
+                  </button>
+                  {!lastInputValid && <Label style={{ position: "absolute", marginTop: "4em" }} pointing='above'>Please enter a value between 4-8</Label>}
+                  <input id="songNumberInput" size="1" maxLength="1" value={numPlayers} style={{ backgroundColor: "var(--light)" }}
+                      onChange={(e) => changeNumPlayers(parseInt(e.target.value))} />
+                  <button className="ui button icon" onClick={() => changeNumPlayers(numPlayers + 1)}>
+                      <i className="angle right icon" />
+                  </button>
+                </div>
+                <br></br><br></br>
+                <div className="enablePrompts"><Checkbox label='Enable Custom Prompts' /></div>
+              </Modal.Content>
               <Modal.Actions className="joinScreenModalButtonContainer">
-                <Button color="teal" onClick={() => setOptionsModalOpenState(false)}>OK</Button>
+                <Button color="teal" onClick={() => setOptionsModalOpenState(false)}><Icon name='check' />OK</Button>
                 <Button inverted color='red' onClick={() => setOptionsModalOpenState(false)}><Icon name='remove' />Close</Button>
               </Modal.Actions>
             </Modal>
+            </div>
+            
+
+            <Link to={{ pathname: "/game/" + gameCode }}>
+              <div><button className="ui button massive darkClickButton" >Start Game</button></div>
+            </Link>
+
           </div>
         </div>
 
