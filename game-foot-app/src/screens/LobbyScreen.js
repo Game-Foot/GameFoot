@@ -11,39 +11,35 @@ import { Modal, Icon, Header, Button, Label, Checkbox } from 'semantic-ui-react'
 // Images
 import stackItUpLogo2 from '../img/SIU Logo 2.png';
 
-function LobbyScreen () {
+function LobbyScreen (props) {
   let gameCode = window.location.href.substring(window.location.href.length - 4, window.location.href.length);
   const MIN_PLAYERS = 4;
-  const MAX_PLAYERS = 12;
-
-  // TEMPORARY
-  let players = [
-    "RJ",
-    "MetallicaFan420",
-    "Arrjay",
-    "Sleeves",
-    "Paprino",
-    "Zuniceratops",
-    "NukedHyenas",
-    "AipomMaster",
-  ]
-
+  const MAX_PLAYERS = 10;
   const [optionsModalOpenState, setOptionsModalOpenState] = useState(false);
   const [returnHomeModalOpenState, setReturnHomeModalOpenState] = useState(false);
-  const [numPlayers, setNumPlayers] = useState(8);
   const [lastInputValid, setLastInputValid] = useState(true);
+  let numPlayersDefault = 0;
+  for (let i = 0; i < MAX_PLAYERS; i++) {
+    if (props.rankingsState[i][2] === true) { numPlayersDefault++; }
+  }
+  const [numPlayers, setNumPlayers] = useState(numPlayersDefault);
 
   const changeNumPlayers = (num) => {
     if (isNaN(num)) {
         setNumPlayers("");
-        setLastInputValid(false)
+        setLastInputValid(false);
     }
     else if (num >= MIN_PLAYERS && num <= MAX_PLAYERS) {
-        setNumPlayers(parseInt(num))
-        setLastInputValid(true)
+        setNumPlayers(parseInt(num));
+        setLastInputValid(true);
+        // Adjust top-level object to reflect number of players.
+        props.rankingsState[num - 1][2] = true;
+        for (let i = num; i < MAX_PLAYERS; i++) {
+          props.rankingsState[i][2] = false;
+        }
     }
     else {
-        setLastInputValid(false)
+        setLastInputValid(false);
     }
 }
 
@@ -92,7 +88,7 @@ function LobbyScreen () {
                   <button className="ui button icon" onClick={() => changeNumPlayers(numPlayers - 1)}>
                       <i className="angle left icon" />
                   </button>
-                  {!lastInputValid && <Label style={{ position: "absolute", marginTop: "4em" }} pointing='above'>Please enter a value between 4-8</Label>}
+                  {!lastInputValid && <Label style={{ position: "absolute", marginTop: "4em" }} pointing='above'>Please enter a value between {MIN_PLAYERS}-{MAX_PLAYERS}</Label>}
                   <input id="songNumberInput" size="1" maxLength="1" value={numPlayers} style={{ backgroundColor: "var(--light)" }}
                       onChange={(e) => changeNumPlayers(parseInt(e.target.value))} />
                   <button className="ui button icon" onClick={() => changeNumPlayers(numPlayers + 1)}>
@@ -103,7 +99,6 @@ function LobbyScreen () {
                 <div className="enablePrompts"><Checkbox label='Enable Custom Prompts' /></div>
               </Modal.Content>
               <Modal.Actions className="joinScreenModalButtonContainer">
-                <Button color="teal" onClick={() => setOptionsModalOpenState(false)}><Icon name='check' />OK</Button>
                 <Button inverted color='red' onClick={() => setOptionsModalOpenState(false)}><Icon name='remove' />Close</Button>
               </Modal.Actions>
             </Modal>
@@ -117,11 +112,11 @@ function LobbyScreen () {
           </div>
         </div>
 
-        {/* This should probably be done in a map. */}
         <div className="lobbyScreenBottom">
-          {players.map((playerName, index) => (
-            <PlayerIcon lobby={true} key={index} index={index} playerName={playerName}></PlayerIcon>
+          {props.rankingsState.map((playerInfo, index) => (
+            (index < numPlayers && playerInfo[2] === true) ? <PlayerIcon lobby={true} key={index} index={index} playerName={playerInfo[0]}></PlayerIcon> : null
           ))}
+          {}
         </div>
           
       </div>

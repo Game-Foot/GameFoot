@@ -12,7 +12,6 @@ import { Redirect } from 'react-router-dom';
 function GameScreen (props) {
 
   var gameCode = window.location.href.substring(window.location.href.length - 4, window.location.href.length);
-  // Time settings
   var TIME_LIMIT = 30;
   var WARNING_TIME = 7;
   var TIMER_DECREMENT_INTERVAL_MS = 1000;
@@ -51,9 +50,9 @@ function GameScreen (props) {
   }
 
   const getItemStyle = (isDragging, draggableStyle, playerInfo, index) => ({
-    padding: 20.2,
-    margin: `0 0 11px 0`,
-    background: isDragging ? "var(--background4)" : PLAYER_COLORS[playerInfo[1]],
+    padding: 19,
+    margin: `0 0 10px 0`,
+    background: isDragging ? "var(--light)" : PLAYER_COLORS[playerInfo[1]],
     filter: answersLocked ? "grayscale(100%) brightness(0.6)" : (index < 3 ? "" : "grayscale(75%)"),
     ...draggableStyle
   })
@@ -97,8 +96,8 @@ function GameScreen (props) {
           <p className="rankYourFriends">Rank your friends!</p>
           <div className="gameScreenDragContainer">
             <div className="gameScreenTop3Text">
-              <p style={{marginBottom: "20%"}}>1st</p>
-              <p style={{marginBottom: "20%"}}>2nd</p>
+              <p style={{marginBottom: "25%"}}>1st</p>
+              <p style={{marginBottom: "25%"}}>2nd</p>
               <p>3rd</p>
             </div>
             <DragDropContext onDragEnd={onDragEnd}>
@@ -109,6 +108,7 @@ function GameScreen (props) {
                   ref={provided.innerRef}
                   >
                     {props.rankingsState.map((playerInfo, index) => (
+                      playerInfo[2] === true ? 
                       <Draggable key={index} draggableId={props.rankingsState.indexOf(playerInfo).toString()} index={index}>
                         {(provided, snapshot) => (
                           <div className="draggableItem"
@@ -125,7 +125,7 @@ function GameScreen (props) {
                             {playerInfo[0]}
                           </div>
                         )}
-                      </Draggable>
+                      </Draggable> : null
                     ))}
                     {provided.placeholder}
                   </div>
