@@ -1,8 +1,8 @@
-// Add all of the backslashes in Excel?
+// Add all of the backslashes and n's in Excel?
 
 const promptWords= () => {
-    return "Hi Tian \
-    How are you?\
+    return "Hi Tian\n\
+    How are you?\n\
     Robbie"
 };
 
