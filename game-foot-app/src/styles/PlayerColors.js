@@ -10,4 +10,5 @@ export const PLAYER_COLORS = [
     "royalblue",
     "blueviolet",
     "gray",
+    "pink",
 ];

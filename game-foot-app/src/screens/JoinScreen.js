@@ -6,6 +6,8 @@ import '../styles/styles.css';
 import React, { useState } from 'react';
 import { Modal, Icon, Header, Button } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
+// Images
+import stackItUpLogo from '../img/SIU Logo 1.png';
 
 function JoinScreen () {
 
@@ -14,8 +16,11 @@ function JoinScreen () {
   const [uploadPicModalOpenStatus, setUploadPicModalOpenStatus] = useState(false);
   const [hostCode, setHostCode] = useState("");
   const [joinCode, setJoinCode] = useState("");
+  const [userProfilePic, setUserProfilePic] = useState("");
 
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  const defaultProfilePic = "https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?fit=300%2C300";
 
   const joinGame = () => {
     setJoinModalOpenStatus(false);
@@ -37,7 +42,34 @@ function JoinScreen () {
     <div className="joinScreen">
 
       <div className="joinScreenTopThird">
-        <p className="joinScreenTitleLogo">STACK IT UP!</p>
+        <Modal
+          basic
+          onClose={() => setUploadPicModalOpenStatus(false)}
+          onOpen={() => setUploadPicModalOpenStatus(true)}
+          open={uploadPicModalOpenStatus}
+          size='small'
+          trigger={<button className="ui button icon massive optionsButton darkClickButton"><Icon name="setting"></Icon></button>}>
+          <Header icon><Icon className='large settings' />Options</Header>
+          <Modal.Content style={{display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
+            Set Username
+            <br></br><br></br>
+            <div className="ui input">
+              <input type="text" maxlength="12" placeholder="Enter username..." style={{backgroundColor: "var(--light)"}}/>
+            </div>
+            <br></br>
+            Upload Profile Picture
+            <br></br><br></br>
+            <div className="ui input">
+              <input type="text" placeholder="Paste URL here" onKeyUp={(e) => setUserProfilePic(e.target.value)} style={{backgroundColor: "var(--light)"}}/>
+            </div>
+            <br></br>
+            <img className="joinScreenPic" src={userProfilePic === "" ? defaultProfilePic : userProfilePic} alt="r"></img>
+          </Modal.Content>
+          <Modal.Actions className="joinScreenModalButtonContainer">
+            <Button color="teal" onClick={() => setUploadPicModalOpenStatus(false)}><Icon name='check' />OK</Button>
+            <Button inverted color='red' onClick={() => setUploadPicModalOpenStatus(false)}><Icon name='remove' />Cancel</Button>
+          </Modal.Actions>
+        </Modal>
       </div>
 
       <div className="joinScreenmiddleThird">
@@ -63,33 +95,11 @@ function JoinScreen () {
             <Button inverted color='red' onClick={() => setJoinModalOpenStatus(false)}><Icon name='remove' />Close</Button>
           </Modal.Actions>
         </Modal>
-        <div className="joinScreenUserOptions">
-          <p className="joinScreenUsernameLabel">User Profile</p>
-          <div className="ui input">
-            <input type="text" width="35" maxlength="12" placeholder="Enter username..." style={{backgroundColor: "var(--light)"}}/>
-          </div>
-          <br></br>
-          <img className="joinScreenPic" alt="r" src="https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?fit=300%2C300"></img>
-          <br></br>
-          <Modal
-          basic
-          onClose={() => setUploadPicModalOpenStatus(false)}
-          onOpen={() => setUploadPicModalOpenStatus(true)}
-          open={uploadPicModalOpenStatus}
-          size='small'
-          trigger={<button className="ui button large darkClickButton">Upload Picture</button>}>
-          <Header icon><Icon className='large users' />
-              Upload Profile Picture
-              <br></br>
-              <br></br>
-              <div className="ui input"><input type="text" width="35" placeholder="Paste URL here" style={{backgroundColor: "var(--light)"}}/></div>
-          </Header>
-          <Modal.Actions className="joinScreenModalButtonContainer">
-            <Button color="teal" onClick={() => setUploadPicModalOpenStatus(false)}><Icon name='picture' />Set Picture</Button>
-            <Button inverted color='red' onClick={() => setUploadPicModalOpenStatus(false)}><Icon name='remove' />Cancel</Button>
-          </Modal.Actions>
-        </Modal>
+
+        <div className="stackItUpLogoContainer">
+          <img className="stackItUpLogo" src={stackItUpLogo} alt="r"></img>
         </div>
+
         <Modal
           basic
           onClose={() => setHostModalOpenStatus(false)}
@@ -106,20 +116,20 @@ function JoinScreen () {
             <Link to={{ pathname: "/lobby/" + hostCode }}>
               <Button color="teal" onClick={hostGame}><Icon name='users'/>Host!</Button>
             </Link>
-            <Button className="secondary"><Icon name='setting'/>Options</Button>
             <Button inverted color='red' onClick={() => setHostModalOpenStatus(false)}><Icon name='remove' />Close</Button>
           </Modal.Actions>
         </Modal>
       </div>
 
       <div className="joinScreenBottomThird">
-        <p>&#169; 2021 Game Foot Inc.</p>
-        <p>gamefootbusiness@gmail.com</p>
+        <p>gamefootbusiness@gmail.com</p>   
         <div className="twitter">
           <img className="twitterPic" src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/twitter-128.png" alt="r"></img>
           <p>&nbsp; @GameFootInc1</p>
         </div>
+        <p className="flag">*For legal reasons this is not the Pan-African flag</p>
       </div>
+
     </div>
   );
 }
