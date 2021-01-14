@@ -85,13 +85,13 @@ function blacklistCheck(lobby,username,timeJoin,sockID){
 
 // return true if player is in players
 function whitelistCheck(lobby,username,timeJoin,sockID){
-  for(var i = 0; i < roomCodes[lobby].disconnects.length; i++){
-    var disconnectPlayer = roomCodes[lobby].disconnects[i];
+  for(var i = 0; i < roomCodes[lobby].players.length; i++){
+    var disconnectPlayer = roomCodes[lobby].players[i];
     if(disconnectPlayer.name == username && (disconnectPlayer.id == sockID || disconnectPlayer.time == timeJoin)){
-      return true;
+      return [true,i];
     }
 }
-return false;
+return [false];
 }
 
 // Host only
