@@ -1,0 +1,441 @@
+/* GENERAL STUFF */
+:root{
+  --background1: #160f29;
+  --background2: #246a73;
+  --background3: #368f8b;
+  --background4: #f3dfc1;
+  --background5: #ddbea8;
+  --background6: #daf1f0;
+  --light: #eeeeee; 
+  --dark: #101a1e; 
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+.darkClickButton {
+  background-color: var(--background1) !important;
+  color: var(--light) !important;
+}
+
+.darkClickButton:hover {
+  background-color: var(--background3) !important;
+  cursor: pointer;
+}
+
+.darkClickButton:active {
+  background-color: var(--background4) !important;
+  color: var(--dark) !important;
+}
+
+/* JOIN SCREEN */
+.joinScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.joinScreenTopThird {
+  background-color: var(--background1);
+  width: 100%;
+  height: 33.33vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.joinScreenTitleLogo {
+  font-size: 120px;
+  color: var(--light);
+  font-style: italic;
+  font-weight: bolder;
+  filter: drop-shadow(5px 5px 0px var(--background2));
+  animation: appLogoWaveIntro 1.5s linear;
+}
+
+.joinScreenmiddleThird {
+  background-color: var(--background2);
+  width: 100%;
+  height: 33.33vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.joinScreenModalButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.joinScreenUserOptions {
+  background-color: var(--background3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2%;
+  z-index: 3;
+  filter: drop-shadow(0px 0px 6px var(--background1));
+  border-radius: 10px;
+}
+
+.joinScreenPic {
+  width: 200px;
+  height: 200px;
+}
+
+.joinScreenUsernameLabel {
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 3%;
+}
+
+.joinScreenBottomThird {
+  background-color: var(--background5);
+  width: 100%;
+  height: 33.33vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.twitter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.twitterPic {
+  width: 25px;
+  height: 25px;
+}
+
+/* LOBBY SCREEN */
+.lobbyScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-image: linear-gradient(var(--background1), var(--background3));
+  width: 100%;
+  height: 100vh;
+}
+
+.lobbyScreenTop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: -5%;
+}
+
+.lobbyJoinGameText {
+  color: var(--light);
+  user-select: none;
+}
+
+.lobbyGameCodeText {
+  font-weight: bolder;
+  font-size: 60px;
+  color: var(--light);
+  filter: drop-shadow(3px 3px 0px var(--background3));
+  margin-top: -15%;
+}
+
+.lobbyScreenMiddle {
+  margin-top: -5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.lobbyScreenTitleLogo {
+  font-size: 120px;
+  color: var(--light);
+  font-style: italic;
+  font-weight: bolder;
+  filter: drop-shadow(5px 5px 0px var(--background3));
+  margin-bottom: 0%;
+}
+
+.lobbyScreenButtonOptions {
+  display: flex;
+}
+
+.lobbyScreenBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+/* PLAYER ICON */
+.playerIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  padding: 1%;
+  filter: drop-shadow(0px 0px 2px var(--dark));
+}
+
+.playerIconRising {
+  animation: iconRise 0.15s ease-out 1;
+  animation-fill-mode: forwards;
+  filter: drop-shadow(0px 0px 20px var(--dark));
+}
+
+.playerIconFalling {
+  animation: iconFall 0.15s ease-in 1;
+  animation-fill-mode: forwards;
+  filter: drop-shadow(0px 0px 2px var(--dark));
+}
+
+.playerIconName {
+  font-size: 170%;
+  width: 150px;
+  text-align: center;
+  overflow: hidden;
+  color: var(--light);
+  filter: drop-shadow(1px 1px 0px var(--dark));
+  user-select: none;
+}
+
+.playerIconPicture {
+  width: 150px;
+  height: 150px;
+  user-select: none;
+}
+
+/* GAME SCREEN */
+.gameScreen {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-image: linear-gradient(var(--background1), var(--background3));
+  height: 100vh;
+}
+
+.gameScreenLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameScreenRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameScreenJoinMsg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.gameScreenBottomButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 4%;
+  width: 40vw;
+}
+
+.draggableBoxBackground {
+  width: 40vw;
+  height: 60vh;
+  padding: 1%;
+}
+
+.rankYourFriends {
+  font-size: 36px;
+  font-style: italic;
+  font-weight: bold;
+  user-select: none;
+  color: var(--light);
+}
+
+.draggableItem {
+  font-size: 18px;
+  font-weight: bold;
+  user-select: none;
+  filter: drop-shadow(3px 3px 3px var(--background1));
+  color: var(--background1);
+}
+
+.gameScreenDivider {
+  width: 30%;
+  background-color: var(--background1) !important;
+}
+
+.gameScreenDragContainer {
+  display: flex;
+  padding: 4%;
+}
+
+.gameScreenTop3Text {
+  flex-direction: column;
+  font-size: 40px;
+  font-weight: bolder;
+  margin-right: 1.5%;
+  margin-top: 1%;
+  color: var(--light);
+  user-select: none;
+  text-align: right;
+}
+
+.gameJoinGameText {
+  user-select: none;
+  color: var(--light);
+}
+
+.gameGameCodeText {
+  font-weight: bolder;
+  font-size: 50px;
+  color: var(--light);
+  filter: drop-shadow(3px 3px 0px var(--background3));
+  margin-top: -15%;
+}
+
+.gameScreenQuestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--light);
+  padding: 6%;
+  user-select: none;
+  text-align: center;
+  width: 35vw;
+}
+
+.gameScreenFormat {
+  font-size: 36px;
+  filter: drop-shadow(3px 3px 0px var(--background3));
+  margin-bottom: 0%;
+}
+
+.gameScreenQuestionText {
+  font-size: 75px;
+}
+
+.timeRemaining {
+  font-size: 90px;
+  filter: drop-shadow(3px 3px 0px var(--background1));
+}
+
+/* RESULTS SCREEN */
+.resultsScreen {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-image: linear-gradient(var(--background3), var(--background1));
+  height: 100vh;
+}
+
+.resultsScreenLeft, .resultsScreenMiddle, .resultsScreenRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.resultsScreenLeft { width: 40vw; user-select: none; }
+
+.resultsScreenMiddle { width: 20vw; }
+
+.resultsScreenRight { width: 40vw; }
+
+.resultsScreenBigText {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.resultsScreenSmallText {
+  font-size: 24px;
+  margin-bottom: 8%;
+}
+
+.resultsScreenTopChoice {
+  font-size: 24px;
+  padding: 4%;
+  margin: 0 0 11px 0;
+  width: 25vw;
+  align-items: center;
+  vertical-align: middle;
+  font-weight: bold;
+  filter: drop-shadow(3px 3px 3px var(--background1));
+  color: var(--background1);
+  border-radius: 5px;
+}
+
+.topChoiceText {
+  margin-left: 2%;
+}
+
+.resultsScreenVerticalDivider {
+  height: 65vh;
+  width: 2px;
+  background-color: var(--background6);
+  margin-bottom: 10%;
+}
+
+/* ANIMATIONS */
+@keyframes appLogoWaveIntro {
+  0% {
+    transform: scaleY(0.1);
+  }
+  30% {
+    transform: scaleY(1.3);
+  }
+  60% {
+    transform: scaleY(1.2);
+  }
+  100% {
+    transform: scaleY(1.0);
+  }
+}
+
+@keyframes iconRise {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-30px);
+  }
+}
+
+@keyframes iconFall {
+  0% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

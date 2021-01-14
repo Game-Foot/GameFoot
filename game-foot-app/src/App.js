@@ -1,26 +1,48 @@
 // Top-level application screen.
 
-import './styles/App.css';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+// Stylings
+import './styles/styles.css';
+import 'semantic-ui-css/semantic.min.css'
+// React stuff
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useState } from 'react';
+// Screens
 import JoinScreen from "./screens/JoinScreen.js";
 import LobbyScreen from "./screens/LobbyScreen.js";
-import VoteScreen from "./screens/VoteScreen.js";
+import GameScreen from "./screens/GameScreen.js";
 import ResultsScreen from "./screens/ResultsScreen.js";
 
 function App() {
 
-  const helperFunction = () => {
-    console.log("e");
-  }
+  // Temporary state to track the players.
+  const [rankingsState, setRankingsState] = useState([
+    ["RJ", 0],
+    ["MetallicaFan420", 1],
+    ["Arrjay", 2],
+    ["Sleeves", 3],
+    ["Paprino", 4],
+    ["Zuniceratops", 5],
+    ["NukedHyenas", 6],
+    ["AipomMaster", 7],
+  ])
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={JoinScreen} />
-        <Route path="/lobby" component={LobbyScreen} />
-        <Route path="/vote" component={VoteScreen} />
-        <Route path="/results" component={ResultsScreen} />
-        <Redirect from={"/:any", "/"} to={{ pathname: "/" }} />
+        <Route path="/lobby/:any" component={LobbyScreen} />
+        <Route path="/game/:any" render={(props) =>
+          <GameScreen 
+            rankingsState={rankingsState} 
+            setRankingsState={setRankingsState}
+          />
+        }/>
+        <Route path="/results/:any" render={(props) =>
+          <ResultsScreen 
+            rankingsState={rankingsState} 
+            setRankingsState={setRankingsState}
+          />
+        }/>
       </Switch>
     </BrowserRouter>
   );

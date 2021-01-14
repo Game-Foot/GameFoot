@@ -1,6 +1,6 @@
 // Loading screen.
 
-import '../styles/App.css';
+import '../styles/styles.css';
 
 function LoadScreen () {
 
