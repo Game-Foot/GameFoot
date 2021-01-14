@@ -58,6 +58,7 @@ io.on('joinLobby', (lobby,username,picture,timeJoin,sock) => {
           // delete player from disconnects, update sock in players and playerID
           sock.emit('mode', roomCodes[lobby].screen);
           sock.emit('players', roomCodes[code].players);
+          roomCodes[lobby].playerID[check[1]] = sock.id;
           sock.join(lobby);
       }
   }}
@@ -104,6 +105,8 @@ io.on('makeLobby', (username,picture,timeJoin,sock) =>{
 });
 
 // run the whole game from here
+// Keep in mind: if someone rejoins, their socket id in players will never update
+// there will be update in playerID column tho
 io.on('startGame', (code) => {
   // emit to everyone game has started
   for(var i = 0; i<roomcodes[codes].rounds * roomcodes[codes].players.length; i++){
@@ -124,15 +127,15 @@ io.on('startGame', (code) => {
 
     if(roomCodes[code].mode = "mixed") {
       if(i % 2 == 0){
-        honcho = Math.floor(Math.random() * roomCodes[code].players.length)
-        aPrompt = "What would " + honcho.name + "Say: " + aPrompt;
+        honcho = Math.floor(Math.random() * roomCodes[code].players.length);
+        aPrompt = "What would " + roomcodes[codes].players[honcho].name + "Say: " + aPrompt;
         scoring = "personal";
       }
     } 
 
     else if(roomCodes[code].mode = "personal") {
-      honcho = roomcodes[codes].players[i%roomcodes[codes].players.length];
-      aPrompt = "What would " + honcho.name + "Say: " + aPrompt;
+      honcho = i%roomcodes[codes].players.length;
+      aPrompt = "What would " + roomcodes[codes].players[honcho].name + "Say: " + aPrompt;
       scoring = "personal";
     }
 
@@ -172,7 +175,7 @@ io.on('startGame', (code) => {
 
 // Answer is in the form of a list with 3 socket ID's
 io.on('answer', (code,sock,answer) => {
-  var thisID = roomCodes[code].playerID.find(x => x=sock.id);
+  var thisID = roomCodes[code].playerID.find(x => x == sock.id);
   roomCodes[code].answers[thisID] = answer;
   sock.to(code).emit('lowerCount', 1);
 });
