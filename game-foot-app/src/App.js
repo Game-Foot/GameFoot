@@ -16,21 +16,28 @@ function App() {
 
   // Temporary state to track the players.
   const [rankingsState, setRankingsState] = useState([
-    ["RJ", 0],
-    ["MetallicaFan420", 1],
-    ["Arrjay", 2],
-    ["Sleeves", 3],
-    ["Paprino", 4],
-    ["Zuniceratops", 5],
-    ["NukedHyenas", 6],
-    ["AipomMaster", 7],
+    ["RJ", 0, true],
+    ["MetallicaFan420", 1, true],
+    ["Arrjay", 2, true],
+    ["Sleeves", 3, true],
+    ["Paprino", 4, true],
+    ["Zuniceratops", 5, true],
+    ["NukedHyenas", 6, true],
+    ["AipomMaster", 7, true],
+    ["UserName1", 8, false],
+    ["UserName2", 9, false],
   ])
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={JoinScreen} />
-        <Route path="/lobby/:any" component={LobbyScreen} />
+        <Route path="/lobby/:any" render={(props) =>
+          <LobbyScreen 
+            rankingsState={rankingsState} 
+            setRankingsState={setRankingsState}
+          />
+        }/>
         <Route path="/game/:any" render={(props) =>
           <GameScreen 
             rankingsState={rankingsState} 
