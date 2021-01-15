@@ -12,7 +12,9 @@ import { Redirect } from 'react-router-dom';
 function GroupResults (props) {
 
     return (
-        <div>GROUP RESULTS</div>
+        <div>
+          GROUP RESULTS
+        </div>
      );
    }
 

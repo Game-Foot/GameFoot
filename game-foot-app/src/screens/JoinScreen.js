@@ -13,22 +13,13 @@ function JoinScreen () {
 
   const [joinModalOpenStatus, setJoinModalOpenStatus] = useState(false);
   const [hostModalOpenStatus, setHostModalOpenStatus] = useState(false);
-  const [uploadPicModalOpenStatus, setUploadPicModalOpenStatus] = useState(false);
   const [hostCode, setHostCode] = useState("");
   const [joinCode, setJoinCode] = useState("");
+  const [username, setUsername] = useState("");
   const [userProfilePic, setUserProfilePic] = useState("");
 
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
   const defaultProfilePic = "https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?fit=300%2C300";
-
-  const joinGame = () => {
-    setJoinModalOpenStatus(false);
-  }
-
-  const hostGame = () => {
-    setHostModalOpenStatus(false);
-  }
 
   const generateHostCode = () => {
     let code = "";
@@ -38,48 +29,23 @@ function JoinScreen () {
     setHostCode(code);
   }
 
+  const saveUserProfile = () => {
+    // Push the user's profile changes to the server.
+  }
+
   return (
     <div className="joinScreen">
-
-      <div className="joinScreenTopThird">
-        <Modal
-          basic
-          onClose={() => setUploadPicModalOpenStatus(false)}
-          onOpen={() => setUploadPicModalOpenStatus(true)}
-          open={uploadPicModalOpenStatus}
-          size='small'
-          trigger={<button className="ui button icon massive optionsButton darkClickButton"><Icon name="setting"></Icon></button>}>
-          <Header icon><Icon className='large settings' />Options</Header>
-          <Modal.Content style={{display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
-            Set Username
-            <br></br><br></br>
-            <div className="ui input">
-              <input type="text" maxlength="12" placeholder="Enter username..." style={{backgroundColor: "var(--light)"}}/>
-            </div>
-            <br></br>
-            Upload Profile Picture
-            <br></br><br></br>
-            <div className="ui input">
-              <input type="text" placeholder="Paste URL here" onKeyUp={(e) => setUserProfilePic(e.target.value)} style={{backgroundColor: "var(--light)"}}/>
-            </div>
-            <br></br>
-            <img className="joinScreenPic" src={userProfilePic === "" ? defaultProfilePic : userProfilePic} alt="r"></img>
-          </Modal.Content>
-          <Modal.Actions className="joinScreenModalButtonContainer">
-            <Button color="teal" onClick={() => setUploadPicModalOpenStatus(false)}><Icon name='check' />OK</Button>
-            <Button inverted color='red' onClick={() => setUploadPicModalOpenStatus(false)}><Icon name='remove' />Cancel</Button>
-          </Modal.Actions>
-        </Modal>
-      </div>
+      <div className="joinScreenTopThird"></div>
 
       <div className="joinScreenmiddleThird">
+        <div style={{display: "flex", flexDirection: "column"}}>
         <Modal
           basic
           onClose={() => setJoinModalOpenStatus(false)}
           onOpen={() => setJoinModalOpenStatus(true)}
           open={joinModalOpenStatus}
           size='small'
-          trigger={<button className="ui button massive darkClickButton">Join Game</button>}>
+          trigger={<button className="ui button massive darkClickButton" style={{marginBottom: "25%"}}>Join Game</button>}>
           <Header icon><Icon className='large user plus' />
               Join Game
               <br></br>
@@ -90,16 +56,11 @@ function JoinScreen () {
           </Header>
           <Modal.Actions className="joinScreenModalButtonContainer">
             <Link to={{ pathname: "/lobby/" + joinCode }}>
-              <Button color="teal" onClick={joinGame}><Icon name='user plus'/>Join!</Button>
+              <Button color="teal" onClick={() => setJoinModalOpenStatus(false)}><Icon name='user plus'/>Join!</Button>
             </Link>
             <Button inverted color='red' onClick={() => setJoinModalOpenStatus(false)}><Icon name='remove' />Close</Button>
           </Modal.Actions>
         </Modal>
-
-        <div className="stackItUpLogoContainer">
-          <img className="stackItUpLogo" src={stackItUpLogo} alt="r"></img>
-        </div>
-
         <Modal
           basic
           onClose={() => setHostModalOpenStatus(false)}
@@ -114,11 +75,35 @@ function JoinScreen () {
           </Header>
           <Modal.Actions className="joinScreenModalButtonContainer">
             <Link to={{ pathname: "/lobby/" + hostCode }}>
-              <Button color="teal" onClick={hostGame}><Icon name='users'/>Host!</Button>
+              <Button color="teal" onClick={() => setHostModalOpenStatus(false)}><Icon name='users'/>Host!</Button>
             </Link>
-            <Button inverted color='red' onClick={() => setHostModalOpenStatus(false)}><Icon name='remove' />Close</Button>
+            <Button inverted color='red' onClick={() => setHostModalOpenStatus(false)}>Close</Button>
           </Modal.Actions>
         </Modal>
+        </div>
+
+        <div className="stackItUpLogoContainer">
+          <img className="stackItUpLogo" src={stackItUpLogo} alt="r"></img>
+        </div>
+
+        <div className="joinScreenUserOptionsContainer">
+          <Icon className="settingsIcon" name='massive settings' />
+          <br></br><br></br><br></br>
+          <p className="joinScreenBigText">Set Username</p>
+          <div className="ui input">
+            <input type="text" maxlength="12" placeholder="Enter username..." onKeyUp={(e) => setUsername(e.target.value)} style={{backgroundColor: "var(--light)"}}/>
+          </div>
+          <p className="joinScreenBigText" style={{height: "4vh"}}>{username}</p>
+          <br></br><br></br>
+          <p className="joinScreenBigText">Upload Profile Picture</p>
+          <div className="ui input">
+            <input type="text" placeholder="Paste URL here" onKeyUp={(e) => setUserProfilePic(e.target.value)} style={{backgroundColor: "var(--light)"}}/>
+          </div>
+          <img className="joinScreenPic" src={userProfilePic === "" ? defaultProfilePic : userProfilePic} alt="r"></img>
+          <br></br>
+          <button className="ui button massive darkClickButton" onClick={saveUserProfile}>Save</button>
+        </div>
+        
       </div>
 
       <div className="joinScreenBottomThird">

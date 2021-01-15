@@ -21,14 +21,14 @@ function ResultsScreen (props) {
   // Render the proper screen.
   const renderScreen = () => {
     let TabElement = resultsMap[currentScreen];
-    return (<TabElement props={props} />)
+    return (<TabElement props={props} currentScreen={currentScreen} setCurrentScreen={setCurrentScreen} />)
   }
 
   return (
     <div className="resultsScreenContainer">
       {renderScreen()}
 
-      <Button onClick={(e) => setCurrentScreen("Group")}>View Group Results<Icon name="arrow right"></Icon></Button>
+      
     </div>
   );
 }

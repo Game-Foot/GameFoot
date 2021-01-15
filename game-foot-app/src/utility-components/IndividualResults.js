@@ -36,7 +36,10 @@ function IndividualResults (props) {
 
         <div className="resultsScreenMiddle">
           <div className="resultsScreenVerticalDivider"></div>
-          <PlayerIcon lobby={false} playerName={rankingsState[5][0]} index={3}></PlayerIcon>
+          <Button className="huge darkClickButton" onClick={() => props.setCurrentScreen("Group")}>
+            View Group Results<Icon name="arrow right"></Icon>
+          </Button>
+          <div className="resultsScreenVerticalDivider"></div>
         </div>
 
         <div className="resultsScreenRight">
