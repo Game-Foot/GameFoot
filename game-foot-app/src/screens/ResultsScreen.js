@@ -26,8 +26,6 @@ function ResultsScreen (props) {
   return (
     <div className="resultsScreenContainer">
       {renderScreen()}
-
-      
     </div>
   );
 }

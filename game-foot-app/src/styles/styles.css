@@ -232,7 +232,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  padding: 0.75%;
+  padding: 10px;
   filter: drop-shadow(0px 0px 2px var(--dark));
 }
 
@@ -389,35 +389,36 @@
   filter: drop-shadow(3px 3px 0px var(--background1));
 }
 
-/* RESULTS SCREEN */
-.resultsScreen {
+/* RESULTS SCREENS */
+.individualResultsScreen {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-image: linear-gradient(var(--background1), var(--background2));
   height: 100vh;
 }
 
-.resultsScreenLeft, .resultsScreenMiddle, .resultsScreenRight {
+.resultsScreenLeftI, .resultsScreenMiddleI, .resultsScreenRightI {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
 }
 
-.resultsScreenLeft { 
-  width: 40vw;
+.resultsScreenLeftI { 
+  width: 37.5vw;
   user-select: none;
-  height: 80vh;
+  background-color: var(--background1);
 }
 
-.resultsScreenMiddle {
-  width: 20vw;
+.resultsScreenMiddleI {
+  width: 25vw;
+  background-color: var(--background2);
 }
 
-.resultsScreenRight { 
-  width: 40vw;
-  height: 100vh;
+.resultsScreenRightI { 
+  width: 37.5vw;
+  background-color: var(--background3);
 }
 
 .resultsScreenBigText {
@@ -440,8 +441,7 @@
   align-items: center;
   vertical-align: middle;
   font-weight: bold;
-  filter: drop-shadow(3px 3px 3px var(--background1));
-  color: var(--background1);
+  filter: drop-shadow(5px 5px 3px var(--dark));
   border-radius: 5px;
 }
 
@@ -454,6 +454,54 @@
   width: 2px;
   background-color: var(--light);
   margin: 10%;
+}
+
+.groupResultsScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.groupResultsScreenTop, .groupResultsScreenMiddle, .groupResultsScreenBottom {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+}
+
+.groupResultsScreenTop {
+  height: 20vh;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background1);
+}
+
+.groupResultsScreenMiddle {
+  height: 60vh;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  padding-bottom: 2%;
+  background-image: linear-gradient(to right, var(--background2), var(--dark));
+}
+
+.groupResultsScreenBottom {
+  height: 20vh;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background3);
+}
+
+.howDidYouStackUp {
+  font-size: 72px;
+  font-weight: bold;
+  color: var(--light);
+}
+
+.playerRankOrScore {
+  color: var(--light);
+  text-align: center;
+  font-size: 32px;
 }
 
 /* ANIMATIONS */

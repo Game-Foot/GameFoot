@@ -115,7 +115,6 @@ function LobbyScreen (props) {
           {props.rankingsState.map((playerInfo, index) => (
             (index < numPlayers && playerInfo[2] === true) ? <PlayerIcon lobby={true} key={index} index={index} playerName={playerInfo[0]}></PlayerIcon> : null
           ))}
-          {}
         </div>
           
       </div>

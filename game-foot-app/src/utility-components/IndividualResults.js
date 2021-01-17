@@ -10,31 +10,42 @@ import { Redirect } from 'react-router-dom';
 
 function IndividualResults (props) {
 
-    let rankingsState = props.props.rankingsState;
+    let numPlayersToDisplay = 3;
+
+    switch (props.props.questionList[props.props.roundsPassed][0]) {
+      case "Top 3":
+        numPlayersToDisplay = 3;
+        break;
+      case "Top 1":
+        numPlayersToDisplay = 1;
+        break; 
+      case "Rank": 
+        numPlayersToDisplay = 8;
+        break;
+    }
 
     return (
-        <div className="resultsScreen">
+        <div className="individualResultsScreen">
 
-        <div className="resultsScreenLeft">
+        <div className="resultsScreenLeftI">
           <p className="resultsScreenBigText">MATCHES</p>
-          <div className="resultsScreenTopChoice" style={{backgroundColor: PLAYER_COLORS[rankingsState[0][1]]}}>
-            <p className="topChoiceText">{rankingsState[0][0]}</p>
-          </div>
-          <p className="resultsScreenSmallText">Player A, Player C (+200)</p>
-          <div className="resultsScreenTopChoice" style={{backgroundColor: PLAYER_COLORS[rankingsState[1][1]]}}>
-          <p className="topChoiceText">{rankingsState[1][0]}</p>
-          </div>
-          <p className="resultsScreenSmallText">Nobody (+0)</p>
-          <div className="resultsScreenTopChoice" style={{backgroundColor: PLAYER_COLORS[rankingsState[2][1]]}}>
-          <p className="topChoiceText">{rankingsState[2][0]}</p>
-          </div>
-          <p className="resultsScreenSmallText">Player F (+100)</p>
+          {/* Display matches for each player that the user picked (number varies based on the question) */}
+          {props.props.rankingsState.map((playerInfo, index) => (
+              (index < numPlayersToDisplay) ?
+              <div>
+                <div className="resultsScreenTopChoice" style={{backgroundColor: PLAYER_COLORS[playerInfo[1]]}}>
+                  <p className="topChoiceText">{playerInfo[0]}</p>
+                </div>
+                <p className="resultsScreenSmallText"><Icon name="user plus" /> Matches would go here.</p>
+              </div>
+               : null
+            ))}
           <br></br>
           <br></br>
           <p className="resultsScreenBigText">TOTAL: +300</p>
         </div>
 
-        <div className="resultsScreenMiddle">
+        <div className="resultsScreenMiddleI">
           <div className="resultsScreenVerticalDivider"></div>
           <Button className="huge darkClickButton" onClick={() => props.setCurrentScreen("Group")}>
             View Group Results<Icon name="arrow right"></Icon>
@@ -42,11 +53,11 @@ function IndividualResults (props) {
           <div className="resultsScreenVerticalDivider"></div>
         </div>
 
-        <div className="resultsScreenRight">
+        <div className="resultsScreenRightI">
           <p className="resultsScreenBigText">APPEARANCES</p>
-          <p className="resultsScreenSmallText">1st) 2x (+60)</p>
-          <p className="resultsScreenSmallText">1st) 1x (+20)</p>
-          <p className="resultsScreenSmallText">1st) 0x (+0)</p>
+          <p className="resultsScreenSmallText"><Icon name="star" /> 1st) 2x (+60)</p>
+          <p className="resultsScreenSmallText"><Icon name="star" /> 2nd) 1x (+20)</p>
+          <p className="resultsScreenSmallText"><Icon name="star" /> 3rd) 0x (+0)</p>
           <p className="resultsScreenBigText">TOTAL: +80</p>
         </div>
 

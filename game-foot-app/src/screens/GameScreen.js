@@ -11,7 +11,7 @@ import { Redirect } from 'react-router-dom';
 
 function GameScreen (props) {
 
-  var TIME_LIMIT = 30;
+  var TIME_LIMIT = 3;
   var WARNING_TIME = 7;
   var TIMER_DECREMENT_INTERVAL_MS = 1000;
   const [lockAnswersModalOpenStatus, setLockAnswersModalOpenStatus] = useState(false);
@@ -83,8 +83,8 @@ function GameScreen (props) {
           <br></br>
           <br></br>
           <div className="gameScreenQuestion">
-            <p className="gameScreenFormat">FORMAT: {props.questionList[0][0]}</p>
-            <p className="gameScreenQuestionText">{props.questionList[0][1]}</p>
+            <p className="gameScreenFormat">FORMAT: {props.questionList[props.roundsPassed][0].toUpperCase()}</p>
+            <p className="gameScreenQuestionText">{props.questionList[props.roundsPassed][1]}</p>
             <p className="timeRemaining" style={time <= WARNING_TIME ? {color: "red"} : {color: "white"}}><Icon name='clock' />{time}</p>
           </div>
           <div className="ui divider"></div>
