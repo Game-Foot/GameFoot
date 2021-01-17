@@ -5,7 +5,7 @@ import '../styles/styles.css';
 // React stuff
 import React, { useState } from 'react';
 import { Modal, Icon, Header, Button } from 'semantic-ui-react';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 // Images
 import stackItUpLogo from '../img/SIU Logo 1.png';
 
@@ -91,7 +91,7 @@ function JoinScreen () {
           <br></br><br></br><br></br>
           <p className="joinScreenBigText">Set Username</p>
           <div className="ui input">
-            <input type="text" maxlength="12" placeholder="Enter username..." onKeyUp={(e) => setUsername(e.target.value)} style={{backgroundColor: "var(--light)"}}/>
+            <input type="text" maxlength="10" placeholder="Enter username..." onKeyUp={(e) => setUsername(e.target.value)} style={{backgroundColor: "var(--light)"}}/>
           </div>
           <p className="joinScreenBigText" style={{height: "4vh"}}>{username}</p>
           <br></br><br></br>
