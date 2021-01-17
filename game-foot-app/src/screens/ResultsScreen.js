@@ -11,7 +11,6 @@ import { Modal, Icon, Header, Button } from 'semantic-ui-react';
 
 function ResultsScreen (props) {
 
-  var gameCode = window.location.href.substring(window.location.href.length - 4, window.location.href.length);
   const resultsMap = {
     "Individual": IndividualResults,
     "Group": GroupResults,

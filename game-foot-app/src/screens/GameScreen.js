@@ -11,7 +11,6 @@ import { Redirect } from 'react-router-dom';
 
 function GameScreen (props) {
 
-  var gameCode = window.location.href.substring(window.location.href.length - 4, window.location.href.length);
   var TIME_LIMIT = 30;
   var WARNING_TIME = 7;
   var TIMER_DECREMENT_INTERVAL_MS = 1000;
@@ -72,20 +71,20 @@ function GameScreen (props) {
       <div className="gameScreen">
         
         {/* Redirect when timer has finished. */}
-        {redirect ? <Redirect to={"/results/" + gameCode}/> : null}
+        {redirect ? <Redirect to={"/results/" + props.gameCode}/> : null}
 
         <div className="gameScreenLeft">
           <div className="gameScreenJoinMsg">
             <h3 className="gameJoinGameText">Join the fun!</h3>
-            <p className="gameGameCodeText">{gameCode}</p>
+            <p className="gameGameCodeText">{props.gameCode}</p>
           </div>
           <br></br>
           <br></br>
           <br></br>
           <br></br>
           <div className="gameScreenQuestion">
-            <p className="gameScreenFormat">FORMAT: TOP 3</p>
-            <p className="gameScreenQuestionText">Who is the most likely to get laid this week?</p>
+            <p className="gameScreenFormat">FORMAT: {props.questionList[0][0]}</p>
+            <p className="gameScreenQuestionText">{props.questionList[0][1]}</p>
             <p className="timeRemaining" style={time <= WARNING_TIME ? {color: "red"} : {color: "white"}}><Icon name='clock' />{time}</p>
           </div>
           <div className="ui divider"></div>

@@ -12,7 +12,6 @@ import { Modal, Icon, Header, Button, Label, Checkbox } from 'semantic-ui-react'
 import stackItUpLogo2 from '../img/SIU Logo 2.png';
 
 function LobbyScreen (props) {
-  let gameCode = window.location.href.substring(window.location.href.length - 4, window.location.href.length);
   const MIN_PLAYERS = 4;
   const MAX_PLAYERS = 10;
   const [optionsModalOpenState, setOptionsModalOpenState] = useState(false);
@@ -49,7 +48,7 @@ function LobbyScreen (props) {
         <div className="lobbyScreenTop">
           <div className="lobbyTopLeft">
             <h2 className="lobbyJoinGameText">Join In!</h2>
-            <p className="lobbyGameCodeText">{gameCode}</p>
+            <p className="lobbyGameCodeText">{props.gameCode}</p>
           </div>
           <img className="stackItUpLogo2" src={stackItUpLogo2} alt=""></img>
           <div className="lobbyTopRight">
@@ -105,7 +104,7 @@ function LobbyScreen (props) {
             </div>
             
 
-            <Link to={{ pathname: "/game/" + gameCode }}>
+            <Link to={{ pathname: "/game/" + props.gameCode }}>
               <div><button className="ui button massive darkClickButton" >Start Game</button></div>
             </Link>
 

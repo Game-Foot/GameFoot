@@ -9,24 +9,22 @@ import { Link, Redirect } from "react-router-dom";
 // Images
 import stackItUpLogo from '../img/SIU Logo 1.png';
 
-function JoinScreen () {
+function JoinScreen (props) {
 
   const [joinModalOpenStatus, setJoinModalOpenStatus] = useState(false);
   const [hostModalOpenStatus, setHostModalOpenStatus] = useState(false);
-  const [hostCode, setHostCode] = useState("");
-  const [joinCode, setJoinCode] = useState("");
   const [username, setUsername] = useState("");
   const [userProfilePic, setUserProfilePic] = useState("");
 
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const defaultProfilePic = "https://i0.wp.com/www.repol.copl.ulaval.ca/wp-content/uploads/2019/01/default-user-icon.jpg?fit=300%2C300";
 
-  const generateHostCode = () => {
+  const generateGameCode = () => {
     let code = "";
     for (let i = 0; i < 4; i++) {
       code += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-    setHostCode(code);
+    props.setGameCode(code);
   }
 
   const saveUserProfile = () => {
@@ -51,11 +49,11 @@ function JoinScreen () {
               <br></br>
               <br></br>
               <div className="ui input">
-                <input onKeyUp={(e) => setJoinCode(e.target.value)} maxlength="4" type="text" placeholder="Enter room code..." style={{backgroundColor: "var(--light)"}}/>
+                <input onKeyUp={(e) => props.setGameCode(e.target.value)} maxlength="4" type="text" placeholder="Enter room code..." style={{backgroundColor: "var(--light)"}}/>
               </div>
           </Header>
           <Modal.Actions className="joinScreenModalButtonContainer">
-            <Link to={{ pathname: "/lobby/" + joinCode }}>
+            <Link to={{ pathname: "/lobby/" + props.gameCode }}>
               <Button color="teal" onClick={() => setJoinModalOpenStatus(false)}><Icon name='user plus'/>Join!</Button>
             </Link>
             <Button inverted color='red' onClick={() => setJoinModalOpenStatus(false)}><Icon name='remove' />Close</Button>
@@ -67,14 +65,14 @@ function JoinScreen () {
           onOpen={() => setHostModalOpenStatus(true)}
           open={hostModalOpenStatus}
           size='small'
-          trigger={<button className="ui button massive darkClickButton" onClick={generateHostCode}>Host Game</button>}>
+          trigger={<button className="ui button massive darkClickButton" onClick={generateGameCode}>Host Game</button>}>
           <Header icon><Icon className='large users' />
               Host Game
               <br></br>
-              <h1>Room Code: {hostCode}</h1>
+              <h1>Room Code: {props.gameCode}</h1>
           </Header>
           <Modal.Actions className="joinScreenModalButtonContainer">
-            <Link to={{ pathname: "/lobby/" + hostCode }}>
+            <Link to={{ pathname: "/lobby/" + props.gameCode }}>
               <Button color="teal" onClick={() => setHostModalOpenStatus(false)}><Icon name='users'/>Host!</Button>
             </Link>
             <Button inverted color='red' onClick={() => setHostModalOpenStatus(false)}>Close</Button>
@@ -87,11 +85,11 @@ function JoinScreen () {
         </div>
 
         <div className="joinScreenUserOptionsContainer">
-          <Icon className="settingsIcon" name='massive settings' />
+          <Icon className="settingsIcon massive" name='settings' />
           <br></br><br></br><br></br>
           <p className="joinScreenBigText">Set Username</p>
           <div className="ui input">
-            <input type="text" maxlength="10" placeholder="Enter username..." onKeyUp={(e) => setUsername(e.target.value)} style={{backgroundColor: "var(--light)"}}/>
+            <input type="text" maxLength="10" placeholder="Enter username..." onKeyUp={(e) => setUsername(e.target.value)} style={{backgroundColor: "var(--light)"}}/>
           </div>
           <p className="joinScreenBigText" style={{height: "4vh"}}>{username}</p>
           <br></br><br></br>
