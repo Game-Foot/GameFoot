@@ -25,6 +25,18 @@ function GroupResults (props) {
       default:
         return place + "th";
     }
+  }
+
+  const mouseOverPlayerIcon = (index) => {
+    setDisplayScore(index);
+    console.log(index);
+    console.log(document);
+    document.getElementById("playerIcon" + index).style.filter = "drop-shadow(0px 0px 7px var(--light))";
+  }
+
+  const mouseOutPlayerIcon = (index) => {
+    setDisplayScore(-1);
+    document.getElementById("playerIcon" + index).style.filter = "none";
 
   }
 
@@ -36,11 +48,13 @@ function GroupResults (props) {
           <div className="groupResultsScreenMiddle">
             {props.props.rankingsState.map((playerInfo, index) => (
               (playerInfo[2] === true) ? 
-              <div onMouseOver={() => setDisplayScore(index)} onMouseOut={() => setDisplayScore(-1)}>
+              <div className="playerInfoContainer" onMouseOver={() => mouseOverPlayerIcon(index)} onMouseOut={() => mouseOutPlayerIcon(index)}>
                 <p className="playerRankOrScore">
                   {displayScore === index ? "_____ pts" : calculatePlacingText(index + 1)}
                 </p>
-                <PlayerIcon lobby={false} key={index} index={index} playerName={playerInfo[0]}/> 
+                <div id={"playerIcon" + index}>
+                  <PlayerIcon lobby={false} key={index} index={index} playerName={playerInfo[0]}/> 
+                </div>
               </div>
               : null
             ))}

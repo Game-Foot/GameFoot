@@ -11,30 +11,13 @@ import { Redirect } from 'react-router-dom';
 
 function GameScreen (props) {
 
-  var TIME_LIMIT = 3;
-  var WARNING_TIME = 7;
-  var TIMER_DECREMENT_INTERVAL_MS = 1000;
   const [lockAnswersModalOpenStatus, setLockAnswersModalOpenStatus] = useState(false);
   const [answersLocked, setAnswerLockStatus] = useState(false);
-  const [time, setTime] = useState(TIME_LIMIT);
   const [redirect, setRedirect] = useState(false);
 
-  // Timer-Related Functions
-  useEffect(() => {
-    const timer = setInterval(() => { getTimeLeft(time - 1, timer); }, TIMER_DECREMENT_INTERVAL_MS);
-    return () => clearInterval(timer);
-  });
-
-  const getTimeLeft = (time, timer) => {
-    setTime(time);
-    if (time === 0) { timeIsUp(timer) };
-    return time;
-  }
-
+  // Called when time is up.
   const timeIsUp = (timer) => {
-    clearInterval(timer);
     lockAnswers();
-    document.getElementsByClassName("timeRemaining")[0].innerHTML = `<Icon name='clock' />0`;
     window.setTimeout(() => setRedirect(true), 2000);
   }
   
@@ -85,7 +68,7 @@ function GameScreen (props) {
           <div className="gameScreenQuestion">
             <p className="gameScreenFormat">FORMAT: {props.questionList[props.roundsPassed][0].toUpperCase()}</p>
             <p className="gameScreenQuestionText">{props.questionList[props.roundsPassed][1]}</p>
-            <p className="timeRemaining" style={time <= WARNING_TIME ? {color: "red"} : {color: "white"}}><Icon name='clock' />{time}</p>
+            <Button className="huge darkClickButton" onClick={timeIsUp}>Click to simulate time up</Button>
           </div>
           <div className="ui divider"></div>
 

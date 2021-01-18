@@ -504,6 +504,10 @@
   font-size: 32px;
 }
 
+.playerInfoContainer {
+  user-select: none;
+}
+
 /* ANIMATIONS */
 @keyframes appLogoFallingIntro {
   0% {
