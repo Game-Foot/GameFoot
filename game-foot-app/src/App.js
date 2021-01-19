@@ -14,6 +14,9 @@ import ResultsScreen from "./screens/ResultsScreen.js";
 
 function App() {
 
+  //const sock = io();
+  const sock = 4;
+
   // Track the code used for the current game.
   const [gameCode, setGameCode] = useState("");
 
@@ -59,12 +62,14 @@ function App() {
       <Switch>
         <Route exact path="/" render={() =>
           <JoinScreen 
+            sock = {sock}
             gameCode={gameCode}
             setGameCode={setGameCode}
           />
         }/>
         <Route path="/lobby/:any" render={() =>
           <LobbyScreen
+            sock = {sock}
             gameCode={gameCode}
             setGameCode={setGameCode}
             rankingsState={rankingsState} 
@@ -73,6 +78,7 @@ function App() {
         }/>
         <Route path="/game/:any" render={() =>
           <GameScreen 
+            sock = {sock}
             gameCode={gameCode}
             setGameCode={setGameCode}
             rankingsState={rankingsState} 
@@ -85,6 +91,7 @@ function App() {
         }/>
         <Route path="/results/:any" render={() =>
           <ResultsScreen
+            sock = {sock}
             gameCode={gameCode}
             setGameCode={setGameCode}
             rankingsState={rankingsState} 

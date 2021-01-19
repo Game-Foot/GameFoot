@@ -5,8 +5,9 @@ const socketio = require('socket.io');
 const app = express();
 
 // Not sure if path should be src or App, test
-const clientPath = '${__dirname}/../src/App';
-console.log('Serving static from ${clientPath}');
+const clientPath = `${__dirname}/../src/App`;
+
+console.log(clientPath);
 
 app.use(express.static(clientPath));
 const server = http.createServer(app);
@@ -44,8 +45,9 @@ io.on('joinLobby', (lobby,username,picture,timeJoin,sock) => {
   if(lobby in roomCodes){ 
     if(blacklistCheck(lobby,username,timeJoin,sock.id)){
       if(roomCodes[lobby].screen == "lobby"){
+        sock.emit('lobby',0);
         sock.join(lobby);
-        var newUser = {name:username, id:sock.id, pic:picture, time=timeJoin, points:0};
+        var newUser = {name:username, id:sock.id, pic:picture, time:timeJoin, points:0};
         roomCodes[lobby].players.push(newUser);
         roomCodes[lobby].playerID.push(sock.id);
         sock.emit('players',roomcodes[lobby].publicplayers);
@@ -56,7 +58,7 @@ io.on('joinLobby', (lobby,username,picture,timeJoin,sock) => {
         if(check[0]){
           // find screen everyone is on and send them there
           // delete player from disconnects, update sock in players and playerID
-          sock.emit('mode', roomCodes[lobby].screen);
+          sock.emit('lobby', roomCodes[lobby].screen);
           sock.emit('players', roomCodes[code].players);
           roomCodes[lobby].playerID[check[1]] = sock.id;
           sock.join(lobby);
@@ -69,7 +71,7 @@ io.on('joinLobby', (lobby,username,picture,timeJoin,sock) => {
   } 
   // error for game lobby not found
   else{
-    sock.emit('lobby',0);
+    sock.emit('lobby',2);
   }
 });
 
@@ -98,8 +100,8 @@ return [false];
 // Host only
 io.on('makeLobby', (username,picture,timeJoin,sock) =>{
   var newCode = lobbyCodeGenerator();
-  var hostUser = {name:username, id:sock.id, pic:picture, time=timeJoin, points:0};
-  roomCodes[newCode] = {host:hostUser, players:[hostUser], playerID = [sock.id], answers = [], blacklist:[], screen="lobby", gameTime=45, resultsTime=15, mode="group", promptType="default", customPrompts=[], rounds=3 };
+  var hostUser = {name:username, id:sock.id, pic:picture, time:timeJoin, points:0};
+  roomCodes[newCode] = {host:hostUser, players:[hostUser], playerID:[sock.id], answers:[], blacklist:[], screen:"lobby", gameTime:45, resultsTime:15, mode:"group", promptType:"default", customPrompts:[], rounds:3 };
   socketio.emit('codeCreated', newCode);
   sock.join(newCode);
 });
@@ -207,6 +209,5 @@ function lobbyCodeGenerator() {
   }
 
 // For prompts, enter them one line at a time in a string
-var promptChoicesTemp = promptWords;
-var promptChoices = promptChoicesTemp.split( "\n" );
+var promptChoices = prompts.split("\n");
 

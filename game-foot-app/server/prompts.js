@@ -1,9 +1,7 @@
 // Add all of the backslashes and n's in Excel?
 
-const promptWords= () => {
-    return "Hi Tian\n\
+ const promptWords="Hi Tian\n\
     How are you?\n\
-    Robbie"
-};
+    Robbie";
 
-module.promptWords = promptWords; 
+module.exports = promptWords; 
