@@ -27,10 +27,6 @@ function JoinScreen (props) {
     props.setGameCode(code);
   }
 
-  const saveUserProfile = () => {
-    // Push the user's profile changes to the server.
-  }
-
   return (
     <div className="joinScreen">
       <div className="joinScreenTopThird"></div>
@@ -98,8 +94,6 @@ function JoinScreen (props) {
             <input type="text" placeholder="Paste URL here" onKeyUp={(e) => setUserProfilePic(e.target.value)} style={{backgroundColor: "var(--light)"}}/>
           </div>
           <img className="joinScreenPic" src={userProfilePic === "" ? defaultProfilePic : userProfilePic} alt="r"></img>
-          <br></br>
-          <button className="ui button massive darkClickButton" onClick={saveUserProfile}>Save</button>
         </div>
         
       </div>
